@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using static Common.Enums;
 
 namespace AMIAgregator
@@ -38,11 +39,27 @@ namespace AMIAgregator
 
         }
 
-        public bool Send(string code, DateTime timestamp, Dictionary<Enums.MeasureType, double> measurements)
+        public void Send(string code, DateTime timestamp, Dictionary<Enums.MeasureType, double> measurements)
         {
 
-           // if(Datas.agregators[agregatorCode])
+            string path = @"..\Measurement.xml";
 
+            string xmlString = $@"<Measure> 
+	            <Code>{code}</Code> 
+	            <Timestamp>{timestamp.ToString()}</Timestamp> 
+            	<Voltage>{employee.PersonalIdentityNumber}</Voltage>
+                </Measure>
+                ";
+
+            // Add text to the file.
+            if (!File.Exists(path))
+                File.WriteAllText(path, xmlString);
+            else
+                File.AppendAllText(path, xmlString);
+
+            // Open the file to read from.
+            string readText = File.ReadAllText(path);
+            Console.WriteLine(readText);
 
 
         }

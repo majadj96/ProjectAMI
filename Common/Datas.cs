@@ -10,7 +10,7 @@ namespace Common
     public class Datas
     {
 
-        public static Dictionary<string, Dictionary<MeasureType, double>> agregators = new Dictionary<string, Dictionary<MeasureType, double>>();
+        public static Dictionary<string, Dictionary<string, Dictionary<MeasureType, double>>> agregators = new Dictionary<string, Dictionary<string, Dictionary<MeasureType, double>>>();
 
     }
 }
