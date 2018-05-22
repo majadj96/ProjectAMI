@@ -1,6 +1,7 @@
 ﻿using Common;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,8 +23,8 @@ namespace AMIAgregator
             agregatorCode = GetHashCode().ToString();
             bool postoji = false;
             Console.WriteLine("----Creating new Agregator----");
-                foreach(KeyValuePair<string, Dictionary<MeasureType,double>> c in Datas.agregators)
-                {
+
+            foreach(KeyValuePair<string,Dictionary<string,Dictionary<MeasureType,double>>> c in Datas.agregators) { 
                     if (c.Key.Equals(agregatorCode))
                     {
                         postoji = true;
@@ -33,7 +34,7 @@ namespace AMIAgregator
 
             if (!postoji)
             {
-                Datas.agregators.Add(agregatorCode, new Dictionary<MeasureType, double>());
+                Datas.agregators.Add(agregatorCode,new Dictionary<string, Dictionary<MeasureType, double>>());
             }
             Console.WriteLine("+New Agregator with "+agregatorCode+" is created");
 
@@ -47,7 +48,10 @@ namespace AMIAgregator
             string xmlString = $@"<Measure> 
 	            <Code>{code}</Code> 
 	            <Timestamp>{timestamp.ToString()}</Timestamp> 
-            	<Voltage>{employee.PersonalIdentityNumber}</Voltage>
+            	<Voltage>{measurements[MeasureType.voltage]}</Voltage>
+            	<Electricity>{measurements[MeasureType.electricity]}</Electricity>
+            	<Activepower>{measurements[MeasureType.activePower]}</Activepower>
+            	<Reactivepower>{measurements[MeasureType.reactivePower]}</Reactivepower>
                 </Measure>
                 ";
 
@@ -58,10 +62,10 @@ namespace AMIAgregator
                 File.AppendAllText(path, xmlString);
 
             // Open the file to read from.
-            string readText = File.ReadAllText(path);
-            Console.WriteLine(readText);
+           // string readText = File.ReadAllText(path);
+           // Console.WriteLine(readText);
 
-
+    
         }
 
         public void turnOff()
