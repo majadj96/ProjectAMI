@@ -10,6 +10,6 @@ namespace Common
     {
         string DeviceCode { get; set; }
         DateTime TimeStamp { get; set; }
-        private
+        Dictionary<Enums.MeasureType, double> measurements { get; set; }
     }
 }
