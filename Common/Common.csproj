@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums.cs" />
+    <Compile Include="IDevice.cs" />
     <Compile Include="Datas.cs" />
     <Compile Include="IAMIAgregator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
