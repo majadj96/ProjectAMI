@@ -30,8 +30,15 @@ namespace AMIDevice
 
             do
             {
-                Console.WriteLine("Choose Agreagator:");
-                foreach(var a in )
+              
+                Console.WriteLine("Choose Agreagator by name:");
+                foreach(var a in Datas.agregators)
+                {
+                    Console.WriteLine("- {1}", a.Key);
+
+                }
+                string name = Console.ReadLine();
+                if(Datas.agregators[name].Values.(DeviceCode))
                 
 
 
