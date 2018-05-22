@@ -13,7 +13,7 @@ namespace AMIDevice
         public string DeviceCode { get; set; }
         public DateTime TimeStamp { get; set; }
         public Dictionary<MeasureType, double> measurements { get ; set ; }
-        public State DeviceState { get; set; }
+       public State DeviceState { get; set; }
         public Device()
         {
             Console.WriteLine("----Creating new Device----");
@@ -32,13 +32,32 @@ namespace AMIDevice
             {
               
                 Console.WriteLine("Choose Agreagator by name:");
-                foreach(var a in Datas.agregators)
+                foreach (KeyValuePair<string, Dictionary<string, Dictionary<MeasureType, double>>> a in Datas.agregators)
                 {
+                    
                     Console.WriteLine("- {1}", a.Key);
 
                 }
+
                 string name = Console.ReadLine();
-                if(Datas.agregators[name].Values.(DeviceCode))
+
+                if (!Datas.agregators.Keys.Contains(name))
+                {
+                    Console.WriteLine("Wrong Agregator name!");
+                    break;
+                }
+
+                if (!Datas.agregators[name].Keys.Contains(DeviceCode))
+                {
+                    Datas.agregators[name].Add(DeviceCode, measurements);
+                    choice = true;
+                }
+                else
+                {
+                    DeviceCode = GetHashCode().ToString();
+                    Datas.agregators[name].Add(DeviceCode, measurements);
+                    choice = true;
+                }
                 
 
 

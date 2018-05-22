@@ -17,14 +17,14 @@ namespace AMIAgregator
             IAMIAgregator agregator1 = new Agregator();
             IAMIAgregator agregator2 = new Agregator();
 
-            Dictionary<MeasureType, double> d = new Dictionary<MeasureType, double>();
+           /* Dictionary<MeasureType, double> d = new Dictionary<MeasureType, double>();
             d.Add(MeasureType.voltage, 234);
             d.Add(MeasureType.reactivePower, 32);
             d.Add(MeasureType.activePower, 200);
             d.Add(MeasureType.electricity, 100);
 
 
-            agregator.Send("23451240", DateTime.Now, d);
+            agregator.Send("23451240", DateTime.Now, d);*/
 
             Console.ReadLine();
 
