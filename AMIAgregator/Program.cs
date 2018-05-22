@@ -13,7 +13,7 @@ namespace AMIAgregator
         static void Main(string[] args)
         {
 
-            IAMIAgregator agregator = new Agregator();
+            IAMIAgregator agregator = new Agregator(1);
 
             ServicePart service = new ServicePart();
             service.Open();

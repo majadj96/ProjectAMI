@@ -11,6 +11,18 @@ namespace AMIDevice
 {
     class Program
     {
+
+        public static void Update(IDevice d)
+        {
+            Random rand = new Random();
+            d.measurements[Enums.MeasureType.electricity]= rand.Next(0, 34);// struja ide u rasponu od 0 do 30kWh
+            d.measurements[Enums.MeasureType.voltage] = rand.Next(0, 244);
+            d.measurements[Enums.MeasureType.activePower] = rand.Next(0, 102);
+            d.measurements[Enums.MeasureType.reactivePower] = rand.Next(0, 103);
+            d.TimeStamp = DateTime.Now;
+
+        }
+
         static void Main(string[] args)
         {
             IDevice device = new Device();
@@ -24,7 +36,7 @@ namespace AMIDevice
             while (true)
             {
                 proxy.Send(device.DeviceCode, device.TimeStamp, device.measurements);
-             
+                Update(device);
                 Thread.Sleep(10000);
             }
 

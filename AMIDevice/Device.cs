@@ -47,15 +47,19 @@ namespace AMIDevice
 
 
                 Console.WriteLine(readText);
-                foreach (KeyValuePair<string, Dictionary<string, Dictionary<MeasureType, double>>> a in Datas.agregators)
+
+            foreach (KeyValuePair<MeasureType, double> a in measurements) // Ispis vrednosti trenutnih
+            {
+                Console.WriteLine(a.Key+" :"+a.Value);
+            }
+                /*
+            foreach (KeyValuePair<string, Dictionary<string, Dictionary<MeasureType, double>>> a in Datas.agregators)
                 {
-                    
-                    Console.WriteLine("- {1}", a.Key);
-
+                    Console.WriteLine("- {0}", a.Key);
                 }
-                
+                */
 
-                gdeSeKacim = Console.ReadLine();
+            gdeSeKacim = Console.ReadLine();
                 /*
                 if (!Datas.agregators.Keys.Contains(name))
                 {

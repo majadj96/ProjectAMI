@@ -19,22 +19,24 @@ namespace AMIAgregator
 
         public static string port;
 
-        public Agregator()
+        public Agregator() { }
+        public Agregator(int e)
         {
             
-            state = State.on;
-            Random r1 = new Random();
-            bool postoji = false;
-            Console.WriteLine("----Creating new Agregator----");
-              Random r = new Random();
-            port = "500" + r.Next(0, 9);
-            agregatorCode = port;
+                state = State.on;
+                Random r1 = new Random();
+                bool postoji = false;
+                Console.WriteLine("----Creating new Agregator----");
+                Random r = new Random();
+                port = "500" + r.Next(0, 9);
+                agregatorCode = port;
 
-        string path = @"..\nameOfAgregators.xml";
+                string path = @"..\nameOfAgregators.xml";
 
-        
 
-            foreach (KeyValuePair<string,Dictionary<string,Dictionary<MeasureType,double>>> c in Datas.agregators) { 
+
+                foreach (KeyValuePair<string, Dictionary<string, Dictionary<MeasureType, double>>> c in Datas.agregators)
+                {
                     if (c.Key.Equals(agregatorCode))
                     {
                         postoji = true;
@@ -42,25 +44,27 @@ namespace AMIAgregator
                     }
                 }
 
-            if (!postoji)
-            {
-                Datas.agregators.Add(agregatorCode,new Dictionary<string, Dictionary<MeasureType, double>>());
-            }
-            Console.WriteLine("+New Agregator with "+agregatorCode+" is created");
+                if (!postoji)
+                {
+                    Datas.agregators.Add(agregatorCode, new Dictionary<string, Dictionary<MeasureType, double>>());
 
-            string xmlString = $@"
+                    Console.WriteLine("+New Agregator with " + agregatorCode + " is created");
+
+                    string xmlString = $@"
 	            <Code>{agregatorCode}</Code>
                 ";
 
-            if (!File.Exists(path))
-            {
+                    if (!File.Exists(path))
+                    {
 
-                File.WriteAllText(path, xmlString);
+                        File.WriteAllText(path, xmlString);
 
-            }
-            else
-                File.AppendAllText(path, xmlString);
-
+                    }
+                    else
+                        File.AppendAllText(path, xmlString);
+                }
+            
+         
 
             // Add text to the file.
 
