@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Enums.cs" />
     <Compile Include="IDevice.cs" />
+    <Compile Include="Datas.cs" />
+    <Compile Include="IAMIAgregator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
