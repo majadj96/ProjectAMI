@@ -11,5 +11,6 @@ namespace Common
         string DeviceCode { get; set; }
         DateTime TimeStamp { get; set; }
         Dictionary<Enums.MeasureType, double> measurements { get; set; }
+        Enums.State DeviceState { get; set; }
     }
 }
