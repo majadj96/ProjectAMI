@@ -14,7 +14,7 @@ namespace Common
         State state { get; set; }
         void turnOn();
         void turnOff();
-        bool Send(string code, DateTime timestamp, Dictionary<MeasureType, double> measurements);
+        void Send(string code, DateTime timestamp, Dictionary<MeasureType, double> measurements);
         
 
     }

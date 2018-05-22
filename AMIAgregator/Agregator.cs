@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using static Common.Enums;
 
 namespace AMIAgregator
@@ -38,14 +39,32 @@ namespace AMIAgregator
 
         }
 
-        public bool Send(string code, DateTime timestamp, Dictionary<Enums.MeasureType, double> measurements)
+        public void Send(string code, DateTime timestamp, Dictionary<Enums.MeasureType, double> measurements)
         {
 
-           // if(Datas.agregators[agregatorCode])
+            using (XmlWriter writer = XmlWriter.Create("measutements.xml"))
+            {
+                writer.WriteStartDocument();
+                writer.WriteStartElement("Employees");
+
+                foreach (Employee employee in employees)
+                {
+                    writer.WriteStartElement("Employee");
+
+                    writer.WriteElementString("ID", employee.Id.ToString());
+                    writer.WriteElementString("FirstName", employee.FirstName);
+                    writer.WriteElementString("LastName", employee.LastName);
+                    writer.WriteElementString("Salary", employee.Salary.ToString());
+
+                    writer.WriteEndElement();
+                }
+
+                writer.WriteEndElement();
+                writer.WriteEndDocument();
 
 
 
-        }
+            }
 
         public void turnOff()
         {
