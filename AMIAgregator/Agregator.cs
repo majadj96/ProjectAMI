@@ -1,8 +1,10 @@
-﻿using Common;
+﻿using AMISystemManagement;
+using Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -15,16 +17,24 @@ namespace AMIAgregator
         public string agregatorCode { get; set; }
         public State state { get ; set; }
 
-        
-    
+        public static string port;
+
         public Agregator()
         {
+            
             state = State.on;
-            agregatorCode = GetHashCode().ToString();
+            Random r1 = new Random();
             bool postoji = false;
             Console.WriteLine("----Creating new Agregator----");
+              Random r = new Random();
+            port = "500" + r.Next(0, 9);
+            agregatorCode = port;
 
-            foreach(KeyValuePair<string,Dictionary<string,Dictionary<MeasureType,double>>> c in Datas.agregators) { 
+        string path = @"..\nameOfAgregators.xml";
+
+        
+
+            foreach (KeyValuePair<string,Dictionary<string,Dictionary<MeasureType,double>>> c in Datas.agregators) { 
                     if (c.Key.Equals(agregatorCode))
                     {
                         postoji = true;
@@ -38,6 +48,23 @@ namespace AMIAgregator
             }
             Console.WriteLine("+New Agregator with "+agregatorCode+" is created");
 
+            string xmlString = $@"
+	            <Code>{agregatorCode}</Code>
+                ";
+
+            if (!File.Exists(path))
+            {
+
+                File.WriteAllText(path, xmlString);
+
+            }
+            else
+                File.AppendAllText(path, xmlString);
+
+
+            // Add text to the file.
+
+          
         }
 
         public void Send(string code, DateTime timestamp, Dictionary<Enums.MeasureType, double> measurements)
@@ -62,9 +89,9 @@ namespace AMIAgregator
                 File.AppendAllText(path, xmlString);
 
             // Open the file to read from.
-           // string readText = File.ReadAllText(path);
-           // Console.WriteLine(readText);
-
+            // string readText = File.ReadAllText(path);
+            // Console.WriteLine(readText);
+            Console.WriteLine("Upisano je");
     
         }
 

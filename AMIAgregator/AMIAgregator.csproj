@@ -52,6 +52,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AMISystemManagement\AMISystemManagement.csproj">
+      <Project>{8A6D8860-154D-46DD-BCE2-EC15E85BDEF1}</Project>
+      <Name>AMISystemManagement</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{0580FA65-E173-4134-8369-7E5AE9AF9342}</Project>
       <Name>Common</Name>
