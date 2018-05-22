@@ -42,29 +42,27 @@ namespace AMIAgregator
         public void Send(string code, DateTime timestamp, Dictionary<Enums.MeasureType, double> measurements)
         {
 
-            using (XmlWriter writer = XmlWriter.Create("measutements.xml"))
-            {
-                writer.WriteStartDocument();
-                writer.WriteStartElement("Employees");
+            string path = @"..\Measurement.xml";
 
-                foreach (Employee employee in employees)
-                {
-                    writer.WriteStartElement("Employee");
+            string xmlString = $@"<Measure> 
+	            <Code>{code}</Code> 
+	            <Timestamp>{timestamp.ToString()}</Timestamp> 
+            	<Voltage>{employee.PersonalIdentityNumber}</Voltage>
+                </Measure>
+                ";
 
-                    writer.WriteElementString("ID", employee.Id.ToString());
-                    writer.WriteElementString("FirstName", employee.FirstName);
-                    writer.WriteElementString("LastName", employee.LastName);
-                    writer.WriteElementString("Salary", employee.Salary.ToString());
+            // Add text to the file.
+            if (!File.Exists(path))
+                File.WriteAllText(path, xmlString);
+            else
+                File.AppendAllText(path, xmlString);
 
-                    writer.WriteEndElement();
-                }
-
-                writer.WriteEndElement();
-                writer.WriteEndDocument();
-
+            // Open the file to read from.
+            string readText = File.ReadAllText(path);
+            Console.WriteLine(readText);
 
 
-            }
+        }
 
         public void turnOff()
         {
