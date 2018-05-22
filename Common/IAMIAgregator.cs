@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Common.Enums;
 
 namespace Common
 {
@@ -10,11 +11,10 @@ namespace Common
     {
 
         string agregatorCode { get; set; }
-
-
+        State state { get; set; }
         void turnOn();
         void turnOff();
-        bool Send(string code, DateTime timestamp, Dictionary<)
+        bool Send(string code, DateTime timestamp, Dictionary<MeasureType, double> measurements);
         
 
     }
