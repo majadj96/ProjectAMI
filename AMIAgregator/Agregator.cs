@@ -10,27 +10,57 @@ namespace AMIAgregator
 {
     class Agregator : IAMIAgregator
     {
-        public string agregatorCode { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public Enums.State state { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string agregatorCode { get; set; }
+        public State state { get ; set; }
 
-        public bool Send(string code, DateTime timestamp, Dictionary<MeasureType, double> measurements);
+        
+    
+        public Agregator()
         {
-            throw new NotImplementedException();
+            state = State.on;
+            agregatorCode = GetHashCode().ToString();
+            bool postoji = false;
+            Console.WriteLine("----Creating new Agregator----");
+                foreach(KeyValuePair<string, Dictionary<MeasureType,double>> c in Datas.agregators)
+                {
+                    if (c.Key.Equals(agregatorCode))
+                    {
+                        postoji = true;
+                        break;
+                    }
+                }
+
+            if (!postoji)
+            {
+                Datas.agregators.Add(agregatorCode, new Dictionary<MeasureType, double>());
+            }
+            Console.WriteLine("+New Agregator with "+agregatorCode+" is created");
+
         }
 
         public bool Send(string code, DateTime timestamp, Dictionary<Enums.MeasureType, double> measurements)
         {
-            throw new NotImplementedException();
+
+           // if(Datas.agregators[agregatorCode])
+
+
+
         }
 
         public void turnOff()
         {
-            throw new NotImplementedException();
+            if(state == State.on)
+            {
+                state = State.off;
+            }
         }
 
         public void turnOn()
         {
-            throw new NotImplementedException();
+            if (state == State.off)
+            {
+                state = State.on;
+            }
         }
     }
 }

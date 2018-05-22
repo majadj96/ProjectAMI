@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,13 @@ namespace AMIAgregator
     {
         static void Main(string[] args)
         {
+
+            IAMIAgregator agregator = new Agregator();
+            IAMIAgregator agregator1 = new Agregator();
+            IAMIAgregator agregator2 = new Agregator();
+
+            Console.ReadLine();
+
         }
     }
 }
