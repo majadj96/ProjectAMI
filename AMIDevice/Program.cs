@@ -35,7 +35,7 @@ namespace AMIDevice
             
 
 
-            ChannelFactory<IAMIAgregator> factory = new ChannelFactory<IAMIAgregator>(new NetTcpBinding(), new EndpointAddress("net.tcp://localhost:" + Device.myAgregator + "/IAMIAgregator"));
+            ChannelFactory<IAMIAgregator> factory = new ChannelFactory<IAMIAgregator>(new NetTcpBinding(), new EndpointAddress("net.tcp://localhost:" + device.myAgregator + "/IAMIAgregator"));
 
             IAMIAgregator proxy = factory.CreateChannel();
 
@@ -43,12 +43,10 @@ namespace AMIDevice
 
             while (isOn)
             {
-                proxy.Send(device.DeviceCode, device.TimeStamp, device.measurements);
+                proxy.Send(device.DeviceCode, device.TimeStamp, device.measurements,device.myAgregator);
                 Update(device);
                 Thread.Sleep(10000);
-                
             }
-
             
             Console.ReadKey();
         }

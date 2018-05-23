@@ -17,7 +17,7 @@ namespace Common
         void turnOn();
         void turnOff();
         [OperationContract]
-        void Send(string code, DateTime timestamp, Dictionary<MeasureType, double> measurements);
+        void Send(string code, DateTime timestamp, Dictionary<MeasureType, double> measurements,string codeAgr); // ***DODAT AGREGATOR CODE***
         
 
     }
