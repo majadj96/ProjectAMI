@@ -38,14 +38,36 @@ namespace AMIDevice
             ChannelFactory<IAMIAgregator> factory = new ChannelFactory<IAMIAgregator>(new NetTcpBinding(), new EndpointAddress("net.tcp://localhost:" + device.myAgregator + "/IAMIAgregator"));
 
             IAMIAgregator proxy = factory.CreateChannel();
-
-            bool isOn = true;
-
-            while (isOn)
+            Task t1 = new Task(() =>
             {
-                proxy.Send(device.DeviceCode, device.TimeStamp, device.measurements,device.myAgregator);
-                Update(device);
-                Thread.Sleep(10000);
+                while (true)
+                {
+                    if (Console.ReadKey(true).Key == ConsoleKey.Escape)
+                    {
+                        device.turnOff();
+                        Console.WriteLine("Device is turned off : {0}", DateTime.Now);
+                    }
+                    if (Console.ReadKey(true).Key == ConsoleKey.Enter)
+                    {
+                        device.turnOn();
+                        Console.WriteLine("Device is turned on : {0}", DateTime.Now);
+                    }
+                }
+            });
+
+            t1.Start();
+
+            while (true)
+            {
+                
+                
+
+                if (device.DeviceState == Enums.State.on)
+                {
+                    proxy.Send(device.DeviceCode, device.TimeStamp, device.measurements, device.myAgregator);
+                    Update(device);
+                    Thread.Sleep(10000);
+                }
             }
             
             Console.ReadKey();

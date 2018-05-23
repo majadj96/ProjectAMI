@@ -119,11 +119,11 @@ namespace AMIDevice
                     if (!File.Exists(pathOfDevices))
                     {
 
-                        File.WriteAllText(path, xmlString);
+                        File.WriteAllText(pathOfDevices, xmlString);
 
                     }
                     else
-                        File.AppendAllText(path, xmlString);
+                        File.AppendAllText(pathOfDevices, xmlString);
 
 
 
