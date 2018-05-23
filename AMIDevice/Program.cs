@@ -21,7 +21,6 @@ namespace AMIDevice
             d.measurements[Enums.MeasureType.activePower] = rand.Next(0, 102);
             d.measurements[Enums.MeasureType.reactivePower] = rand.Next(0, 103);
             d.TimeStamp = DateTime.Now;
-
         }
 
         static void Main(string[] args)
@@ -32,12 +31,10 @@ namespace AMIDevice
             {
                 Console.WriteLine("{0} : {1}", v.Key, v.Value);
             }
-            
-            
 
-            ChannelFactory<IAMIAgregator> factory = new ChannelFactory<IAMIAgregator>(new NetTcpBinding(), new EndpointAddress("net.tcp://localhost:" + device.myAgregator + "/IAMIAgregator"));
+            
+            CreateChannelDevice createChannelDevice = new CreateChannelDevice(device.myAgregator);
 
-            IAMIAgregator proxy = factory.CreateChannel();
             Task t1 = new Task(() =>
             {
                 while (true)
@@ -66,8 +63,8 @@ namespace AMIDevice
                 {
                     try
                     {
-                        proxy = factory.CreateChannel();
-                        proxy.Send(device.DeviceCode, device.TimeStamp, device.measurements, device.myAgregator);
+                        CreateChannelDevice.proxy = CreateChannelDevice.factory.CreateChannel();
+                        CreateChannelDevice.proxy.Send(device.DeviceCode, device.TimeStamp, device.measurements, device.myAgregator);
                     }catch(Exception e)
                     {
                         Console.WriteLine("Agregator is not available at the moment, please try later.");

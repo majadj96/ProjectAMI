@@ -11,11 +11,12 @@ namespace AMIDevice
     public class CreateChannelDevice
     {
 
+        public static IAMIAgregator proxy;
+        public static ChannelFactory<IAMIAgregator> factory;
         public CreateChannelDevice(string port)
         {
-            ChannelFactory<IAMIAgregator> factory = new ChannelFactory<IAMIAgregator>(new NetTcpBinding(), new EndpointAddress("net.tcp://localhost:"+port+"/IAMIAgregator"));
-
-            IAMIAgregator proxy = factory.CreateChannel();
+            factory = new ChannelFactory<IAMIAgregator>(new NetTcpBinding(), new EndpointAddress("net.tcp://localhost:"+port+"/IAMIAgregator"));
+            proxy = factory.CreateChannel();
         }
     }
 }

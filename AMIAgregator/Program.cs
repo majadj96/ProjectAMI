@@ -18,9 +18,7 @@ namespace AMIAgregator
 
             ServicePart service = new ServicePart();
             service.Open();
-
-
-
+            
             Task t1 = new Task(() =>
             {
                 while (true)
@@ -51,8 +49,7 @@ namespace AMIAgregator
                     Thread.Sleep(5*3600);
                 }
             }
-
-
+            
             Console.ReadLine();
 
         }

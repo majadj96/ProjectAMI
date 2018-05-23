@@ -94,7 +94,7 @@ namespace AMIDevice
                         string xmlString = $@"
 	                      <Code>{DeviceCode}</Code>
                            ";
-                        File.WriteAllText(path, xmlString);
+                        File.WriteAllText(pathOfDevices, xmlString);
                     }
                     else
                     {

@@ -107,18 +107,10 @@ namespace AMIAgregator
             if (!File.Exists(path))
                 File.WriteAllText(path, xmlString);
             else
-                try
-                {
-                    File.AppendAllText(path, xmlString); // OVDE SAMO BACA EXCEPTION JER NE MOZE DA PISE U ISTO VREME
-                }
-                catch (Exception e)
-                {
-
-                }
-            // Open the file to read from.
-            // string readText = File.ReadAllText(path);
-            // Console.WriteLine(readText);
-            Console.WriteLine("Upisano je");
+            {
+                File.AppendAllText(path, xmlString); // OVDE SAMO BACA EXCEPTION JER NE MOZE DA PISE U ISTO VREME
+                Console.WriteLine("Upisano je");
+            }
     
         }
 
