@@ -32,10 +32,10 @@ namespace AMIDevice
             {
               
                 Console.WriteLine("Choose Agreagator by name:");
-                foreach (KeyValuePair<string, Dictionary<string, Dictionary<MeasureType, double>>> a in Datas.agregators)
+                foreach (var a in Datas.agregators.Keys)
                 {
                     
-                    Console.WriteLine("- {1}", a.Key);
+                    Console.WriteLine("- {1}", a);
 
                 }
 
@@ -63,6 +63,22 @@ namespace AMIDevice
 
             } while (choice == false);
             Console.WriteLine("----New Device with code {0} is created----", DeviceCode);
+        }
+
+        public void turnOff()
+        {
+            if (DeviceState == State.on)
+            {
+                DeviceState = State.off;
+            }
+        }
+
+        public void turnOn()
+        {
+            if (DeviceState == State.off)
+            {
+                DeviceState = State.on;
+            }
         }
     }
 }
