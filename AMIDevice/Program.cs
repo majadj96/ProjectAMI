@@ -45,10 +45,14 @@ namespace AMIDevice
             {
                 proxy.Send(device.DeviceCode, device.TimeStamp, device.measurements,device.myAgregator);
                 Update(device);
+
                 Thread.Sleep(10000);
             }
             
             Console.ReadKey();
         }
+
+
+
     }
 }
