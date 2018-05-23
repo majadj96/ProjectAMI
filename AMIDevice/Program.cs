@@ -33,7 +33,7 @@ namespace AMIDevice
                 Console.WriteLine("{0} : {1}", v.Key, v.Value);
             }
             
-
+            
 
             ChannelFactory<IAMIAgregator> factory = new ChannelFactory<IAMIAgregator>(new NetTcpBinding(), new EndpointAddress("net.tcp://localhost:" + device.myAgregator + "/IAMIAgregator"));
 
