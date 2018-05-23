@@ -54,7 +54,7 @@ namespace AMIAgregator
                     string xmlString = $@"
 	            <Code>{agregatorCode}</Code>
                 ";
-                     File.Create(pathForDevices);
+                     
                     if (!File.Exists(path))
                     {
 

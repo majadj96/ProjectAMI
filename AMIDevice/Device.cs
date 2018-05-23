@@ -112,23 +112,24 @@ namespace AMIDevice
                             break;
                         }
                     }
+                    string xmlString = $@"
+	            <Code>{DeviceCode}</Code>
+                ";
+                    
+                    if (!File.Exists(pathOfDevices))
+                    {
+
+                        File.WriteAllText(path, xmlString);
+
+                    }
+                    else
+                        File.AppendAllText(path, xmlString);
 
 
 
                     Console.WriteLine("----New Device with code {0} is created----", DeviceCode);
                 }
 
-               /* if (!Datas.agregators[myAgregator].Keys.Contains(DeviceCode))
-                {
-                    Datas.agregators[myAgregator].Add(DeviceCode, measurements);
-                    choice = true;
-                }
-                else
-                {
-                    DeviceCode = GetHashCode().ToString();
-                    Datas.agregators[myAgregator].Add(DeviceCode, measurements);
-                    choice = true;
-                }*/
 
            
             } while (choice == false);
