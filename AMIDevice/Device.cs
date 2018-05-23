@@ -42,28 +42,24 @@ namespace AMIDevice
                 string path = @"..\..\..\AMIAgregator\bin\nameOfAgregators.xml";
 
                 string[] listOfAgregators = new string[10];
+                string[] listOfDevices = new string[10];
                 int j = 0;
                /* using (XmlReader reader = XmlReader.Create(path))
                 {
                     while (reader.Read())
                     {
-                       
-                        if (reader.IsStartElement())
+                       // reader.MoveToContent();
+                        if (reader.Name == "code")
                         {
-                            if (reader.Name == "code")
-                            {
-                                if (reader.Read())
-                                {
-                                    listOfAgregators[j] = reader.Value.Trim();
-                                   
-                                    Console.WriteLine("*- {0}", listOfAgregators[j]);
-                                    j++;
-                                }
-                            }
+                            //reader.Read();
+                            listOfAgregators[j] = reader.Value.Trim();
+                            Console.WriteLine("*- {0}", listOfAgregators[j]);
+                            j++;
                         }
                     }
                 }*/
 
+               
                  string readText = File.ReadAllText(path);
 
                  string[] split = readText.Split('<','>');
@@ -75,7 +71,7 @@ namespace AMIDevice
                      j++;
                      Console.WriteLine("- {0}", split[i]);
                  }
-                 myAgregator = Console.ReadLine();
+                myAgregator = Console.ReadLine();
 
 
                  for (int i = 0; i < listOfAgregators.Length; i++) {
@@ -95,6 +91,29 @@ namespace AMIDevice
                 {
                     string pathOfDevices = @"..\..\..\AMIAgregator\bin\agregator"+myAgregator+".xml";
                     string readFile = File.ReadAllText(path);
+
+                    string[] splitDevices = readText.Split('<', '>');
+                    //Console.WriteLine(readText);
+                    int d = 0;
+                    for (int i = 2; i < splitDevices.Length; i = i + 4)
+                    {
+
+                        listOfDevices[d] = splitDevices[i];
+                        d++;
+                        
+                        
+                    }
+                    
+                    foreach (string s in listOfDevices)
+                    {
+                        if (DeviceCode == s)
+                        {
+                            DeviceCode = rand.Next(0, 100).ToString();
+                            break;
+                        }
+                    }
+
+
 
                     Console.WriteLine("----New Device with code {0} is created----", DeviceCode);
                 }
