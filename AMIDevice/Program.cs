@@ -41,12 +41,18 @@ namespace AMIDevice
 
             bool isOn = true;
 
+          
+
+
+
             while (isOn)
             {
-                proxy.Send(device.DeviceCode, device.TimeStamp, device.measurements,device.myAgregator);
-                Update(device);
+                    proxy.Send(device.DeviceCode, device.TimeStamp, device.measurements, device.myAgregator);
 
-                Thread.Sleep(10000);
+                    Update(device);
+
+                    Thread.Sleep(10000);
+                       
             }
             
             Console.ReadKey();
