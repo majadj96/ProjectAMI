@@ -22,7 +22,6 @@ namespace AMIAgregator
         public Agregator() { }
         public Agregator(int e)
         {
-            
                 state = State.on;
                 Random r1 = new Random();
                 bool postoji = false;
@@ -32,7 +31,7 @@ namespace AMIAgregator
                 agregatorCode = port;
 
                 string path = @"..\nameOfAgregators.xml";
-                 string name = "agreagator" + agregatorCode; // svaki agregator pravi xml za svoje uredjaje
+                 string name = "agreagator" + agregatorCode; // svaki agregator pravi xml za svoje uredjaje 
                 string pathForDevices = @"..\" + name + ".xml";
 
 
@@ -73,13 +72,12 @@ namespace AMIAgregator
           
         }
 
-        public void Send(string code, DateTime timestamp, Dictionary<Enums.MeasureType, double> measurements)
+        public void Send(string code, DateTime timestamp, Dictionary<Enums.MeasureType, double> measurements,string codeAgr)
         {
 
-            string path = @"..\Measurement.xml";
+            string path = @"..\"+codeAgr+"_"+code+".xml"; // primer : 5001_274623.xml
 
-            string xmlString = $@"<Measure> 
-	            <Code>{code}</Code> 
+            string xmlString = $@"<Measure>
 	            <Timestamp>{timestamp.ToString()}</Timestamp> 
             	<Voltage>{measurements[MeasureType.voltage]}</Voltage>
             	<Electricity>{measurements[MeasureType.electricity]}</Electricity>

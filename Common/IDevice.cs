@@ -12,6 +12,7 @@ namespace Common
         DateTime TimeStamp { get; set; }
         Dictionary<Enums.MeasureType, double> measurements { get; set; }
         Enums.State DeviceState { get; set; }
+        string myAgregator { get; set; }
 
         void turnOn();
         void turnOff();
