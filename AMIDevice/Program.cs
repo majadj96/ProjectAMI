@@ -64,9 +64,17 @@ namespace AMIDevice
 
                 if (device.DeviceState == Enums.State.on)
                 {
-                    proxy.Send(device.DeviceCode, device.TimeStamp, device.measurements, device.myAgregator);
+                    try
+                    {
+                        proxy = factory.CreateChannel();
+                        proxy.Send(device.DeviceCode, device.TimeStamp, device.measurements, device.myAgregator);
+                    }catch(Exception e)
+                    {
+                        Console.WriteLine("Agregator is not available at the moment, please try later.");
+
+                    }
                     Update(device);
-                    Thread.Sleep(10000);
+                    Thread.Sleep(1000);
                 }
             }
             

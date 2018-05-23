@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using static Common.Enums;
 
@@ -17,6 +18,40 @@ namespace AMIAgregator
 
             ServicePart service = new ServicePart();
             service.Open();
+
+
+
+            Task t1 = new Task(() =>
+            {
+                while (true)
+                {
+                    if (Console.ReadKey(true).Key == ConsoleKey.Escape)
+                    {
+                        agregator.turnOff();
+                        Console.WriteLine("Device is turned off : {0}", DateTime.Now);
+                        service.Close();
+                    }
+                    if (Console.ReadKey(true).Key == ConsoleKey.Enter)
+                    {
+                        agregator.turnOn();
+                        Console.WriteLine("Device is turned on : {0}", DateTime.Now);
+                        service = new ServicePart();
+                        service.Open();
+                    }
+                }
+            });
+
+            t1.Start();
+
+            while (true)
+            {
+                if (agregator.state == Enums.State.on)
+                {
+                   // proxy.Send(device.DeviceCode, device.TimeStamp, device.measurements, device.myAgregator);
+                    Thread.Sleep(5*3600);
+                }
+            }
+
 
             Console.ReadLine();
 

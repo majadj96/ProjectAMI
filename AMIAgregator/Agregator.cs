@@ -27,49 +27,66 @@ namespace AMIAgregator
                 bool postoji = false;
                 Console.WriteLine("----Creating new Agregator----");
                 Random r = new Random();
-                port = "500" + r.Next(0, 9);
+                port = "50"+r.Next(0,9) + r.Next(0, 9);
                 agregatorCode = port;
 
                 string path = @"..\nameOfAgregators.xml";
                  string name = "agreagator" + agregatorCode; // svaki agregator pravi xml za svoje uredjaje 
                 string pathForDevices = @"..\" + name + ".xml";
+            bool added = false;
+            if (!File.Exists(path))
+            {
+                added = true;
+                string xmlString = $@"
+	                <Code>{agregatorCode}</Code>
+                    ";
+                File.WriteAllText(path, xmlString);
+            }
+            else
+            {
+                string readFile = File.ReadAllText(path);
 
+                string[] splitAgregators = readFile.Split('<', '>');
+                string[] listOfAgregators = new string[10];
 
-
-                foreach (KeyValuePair<string, Dictionary<string, Dictionary<MeasureType, double>>> c in Datas.agregators)
+                //Console.WriteLine(readText);
+                int d = 0;
+                for (int i = 2; i < splitAgregators.Length; i = i + 4)
                 {
-                    if (c.Key.Equals(agregatorCode))
-                    {
-                        postoji = true;
-                        break;
-                    }
+                    listOfAgregators[d] = splitAgregators[i];
+                    d++;
                 }
-
-                if (!postoji)
+                bool ima = false;
+                do
                 {
-                    Datas.agregators.Add(agregatorCode, new Dictionary<string, Dictionary<MeasureType, double>>());
+                    ima = false;
+                    foreach (string s in listOfAgregators)
+                    {
+                        if (agregatorCode == s)
+                        {
+                            Console.WriteLine("Code {0} is already exists!", s);
+                            agregatorCode = ("50" + r.Next(0, 9) + r.Next(0, 9)).ToString();
+                            port = agregatorCode;
+                            Console.WriteLine("New code is : {0}", agregatorCode);
+                            ima = true;
+                            break;
+                        }
+                    }
+                } while (ima);
+            }
+            if (!postoji)
+                {
 
                     Console.WriteLine("+New Agregator with " + agregatorCode + " is created");
-
+                if (!added)
+                {
                     string xmlString = $@"
-	            <Code>{agregatorCode}</Code>
-                ";
-                     
-                    if (!File.Exists(path))
-                    {
-
-                        File.WriteAllText(path, xmlString);
-
-                    }
-                    else
-                        File.AppendAllText(path, xmlString);
+	                <Code>{agregatorCode}</Code>
+                    ";
+                    File.AppendAllText(path, xmlString);
                 }
-            
-         
 
-            // Add text to the file.
-
-          
+            }
         }
 
         public void Send(string code, DateTime timestamp, Dictionary<Enums.MeasureType, double> measurements,string codeAgr)

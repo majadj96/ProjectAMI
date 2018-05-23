@@ -16,7 +16,6 @@ namespace AMIAgregator
             serviceHost = new ServiceHost(typeof(Agregator));
             serviceHost.AddServiceEndpoint(typeof(IAMIAgregator), new NetTcpBinding(), new Uri("net.tcp://localhost:"+Agregator.port+"/IAMIAgregator"));
         }
-
         public void Open()
         {
             Console.WriteLine("Kanal je otvoren sa portom - " + Agregator.port);

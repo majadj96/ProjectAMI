@@ -85,53 +85,52 @@ namespace AMIDevice
                 if (!choice)
                 {
                     Console.WriteLine("Wrong Agregator name!");
-                   
                 }
                 else
                 {
                     string pathOfDevices = @"..\..\..\AMIAgregator\bin\agregator"+myAgregator+".xml";
-                    string readFile = File.ReadAllText(path);
-
-                    string[] splitDevices = readText.Split('<', '>');
-                    //Console.WriteLine(readText);
-                    int d = 0;
-                    for (int i = 2; i < splitDevices.Length; i = i + 4)
-                    {
-
-                        listOfDevices[d] = splitDevices[i];
-                        d++;
-                        
-                        
-                    }
-                    
-                    foreach (string s in listOfDevices)
-                    {
-                        if (DeviceCode == s)
-                        {
-                            DeviceCode = rand.Next(0, 100).ToString();
-                            break;
-                        }
-                    }
-                    string xmlString = $@"
-	            <Code>{DeviceCode}</Code>
-                ";
-                    
                     if (!File.Exists(pathOfDevices))
                     {
-
-                        File.WriteAllText(pathOfDevices, xmlString);
-
+                        string xmlString = $@"
+	                      <Code>{DeviceCode}</Code>
+                           ";
+                        File.WriteAllText(path, xmlString);
                     }
                     else
+                    {
+                        string readFile = File.ReadAllText(pathOfDevices);
+                        string[] splitDevices = readFile.Split('<', '>');
+                        //Console.WriteLine(readText);
+                        int d = 0;
+                        for (int i = 2; i < splitDevices.Length; i = i + 4)
+                        {
+                            listOfDevices[d] = splitDevices[i];
+                            d++;
+                        }
+
+                        bool exists = false;
+                        do
+                        {
+                            exists = false;
+                            foreach (string s in listOfDevices)
+                            {
+                                if (DeviceCode == s)
+                                {
+                                    DeviceCode = rand.Next(0, 100).ToString();
+                                    exists = true;
+                                    break;
+                                }
+                            }
+                        } while (exists);
+
+                        string xmlString = $@"
+	                    <Code>{DeviceCode}</Code>
+                         ";
+
                         File.AppendAllText(pathOfDevices, xmlString);
-
-
-
+                    }
                     Console.WriteLine("----New Device with code {0} is created----", DeviceCode);
                 }
-
-
-           
             } while (choice == false);
            
 
