@@ -18,7 +18,7 @@ namespace AMIDevice
         public Dictionary<MeasureType, double> measurements { get ; set ; }
        public State DeviceState { get; set; }
 
-        public static string gdeSeKacim;
+        public static string myAgregator;
         public Device()
         {
             Console.WriteLine("----Creating new Device----");
@@ -35,54 +35,86 @@ namespace AMIDevice
 
             bool choice = false;
 
-        //    do
-         //   {
-              
+            do
+            {
                 Console.WriteLine("Choose Agreagator by name:");
 
-                string path = @"C:\Users\john\Desktop\RES\ProjectAMI\AMIAgregator\bin\nameOfAgregators.xml";
+                string path = @"..\..\..\AMIAgregator\bin\nameOfAgregators.xml";
 
-                    string readText = File.ReadAllText(path);
-            
-
-
-                Console.WriteLine(readText);
-
-            foreach (KeyValuePair<MeasureType, double> a in measurements) // Ispis vrednosti trenutnih
-            {
-                Console.WriteLine(a.Key+" :"+a.Value);
-            }
-                /*
-            foreach (KeyValuePair<string, Dictionary<string, Dictionary<MeasureType, double>>> a in Datas.agregators)
+                string[] listOfAgregators = new string[10];
+                int j = 0;
+               /* using (XmlReader reader = XmlReader.Create(path))
                 {
-                    Console.WriteLine("- {0}", a.Key);
-                }
-                */
+                    while (reader.Read())
+                    {
+                       
+                        if (reader.IsStartElement())
+                        {
+                            if (reader.Name == "code")
+                            {
+                                if (reader.Read())
+                                {
+                                    listOfAgregators[j] = reader.Value.Trim();
+                                   
+                                    Console.WriteLine("*- {0}", listOfAgregators[j]);
+                                    j++;
+                                }
+                            }
+                        }
+                    }
+                }*/
 
-            gdeSeKacim = Console.ReadLine();
-                /*
-                if (!Datas.agregators.Keys.Contains(name))
+                 string readText = File.ReadAllText(path);
+
+                 string[] split = readText.Split('<','>');
+                 //Console.WriteLine(readText);
+                 
+                 for(int i = 2; i < split.Length; i = i + 4)
+                 {
+                     listOfAgregators[j] = split[i];
+                     j++;
+                     Console.WriteLine("- {0}", split[i]);
+                 }
+                 myAgregator = Console.ReadLine();
+
+
+                 for (int i = 0; i < listOfAgregators.Length; i++) {
+                     if (listOfAgregators[i] == myAgregator)
+                     {
+                         choice = true;
+                         break;
+                     }
+
+                 }
+                if (!choice)
                 {
                     Console.WriteLine("Wrong Agregator name!");
-                    break;
+                   
+                }
+                else
+                {
+                    string pathOfDevices = @"..\..\..\AMIAgregator\bin\agregator"+myAgregator+".xml";
+                    string readFile = File.ReadAllText(path);
+
+                    Console.WriteLine("----New Device with code {0} is created----", DeviceCode);
                 }
 
-                if (!Datas.agregators[name].Keys.Contains(DeviceCode))
+               /* if (!Datas.agregators[myAgregator].Keys.Contains(DeviceCode))
                 {
-                    Datas.agregators[name].Add(DeviceCode, measurements);
+                    Datas.agregators[myAgregator].Add(DeviceCode, measurements);
                     choice = true;
                 }
                 else
                 {
                     DeviceCode = GetHashCode().ToString();
-                    Datas.agregators[name].Add(DeviceCode, measurements);
+                    Datas.agregators[myAgregator].Add(DeviceCode, measurements);
                     choice = true;
-                }
-                
-    */
+                }*/
 
-           // } while (choice == false);
-            Console.WriteLine("----New Device with code {0} is created----", DeviceCode);
+           
+            } while (choice == false);
+           
+
         }
 
         public void turnOff()

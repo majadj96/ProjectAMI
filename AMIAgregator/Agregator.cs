@@ -32,6 +32,8 @@ namespace AMIAgregator
                 agregatorCode = port;
 
                 string path = @"..\nameOfAgregators.xml";
+                 string name = "agreagator" + agregatorCode; // svaki agregator pravi xml za svoje uredjaje
+                string pathForDevices = @"..\" + name + ".xml";
 
 
 
@@ -53,7 +55,7 @@ namespace AMIAgregator
                     string xmlString = $@"
 	            <Code>{agregatorCode}</Code>
                 ";
-
+                     File.Create(pathForDevices);
                     if (!File.Exists(path))
                     {
 
