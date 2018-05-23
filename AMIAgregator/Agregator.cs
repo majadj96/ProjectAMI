@@ -1,8 +1,10 @@
-﻿using Common;
+﻿using AMISystemManagement;
+using Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -15,16 +17,26 @@ namespace AMIAgregator
         public string agregatorCode { get; set; }
         public State state { get ; set; }
 
-        
-    
-        public Agregator()
-        {
-            state = State.on;
-            agregatorCode = GetHashCode().ToString();
-            bool postoji = false;
-            Console.WriteLine("----Creating new Agregator----");
+        public static string port;
 
-            foreach(KeyValuePair<string,Dictionary<string,Dictionary<MeasureType,double>>> c in Datas.agregators) { 
+        public Agregator() { }
+        public Agregator(int e)
+        {
+            
+                state = State.on;
+                Random r1 = new Random();
+                bool postoji = false;
+                Console.WriteLine("----Creating new Agregator----");
+                Random r = new Random();
+                port = "500" + r.Next(0, 9);
+                agregatorCode = port;
+
+                string path = @"..\nameOfAgregators.xml";
+
+
+
+                foreach (KeyValuePair<string, Dictionary<string, Dictionary<MeasureType, double>>> c in Datas.agregators)
+                {
                     if (c.Key.Equals(agregatorCode))
                     {
                         postoji = true;
@@ -32,12 +44,31 @@ namespace AMIAgregator
                     }
                 }
 
-            if (!postoji)
-            {
-                Datas.agregators.Add(agregatorCode,new Dictionary<string, Dictionary<MeasureType, double>>());
-            }
-            Console.WriteLine("+New Agregator with "+agregatorCode+" is created");
+                if (!postoji)
+                {
+                    Datas.agregators.Add(agregatorCode, new Dictionary<string, Dictionary<MeasureType, double>>());
 
+                    Console.WriteLine("+New Agregator with " + agregatorCode + " is created");
+
+                    string xmlString = $@"
+	            <Code>{agregatorCode}</Code>
+                ";
+
+                    if (!File.Exists(path))
+                    {
+
+                        File.WriteAllText(path, xmlString);
+
+                    }
+                    else
+                        File.AppendAllText(path, xmlString);
+                }
+            
+         
+
+            // Add text to the file.
+
+          
         }
 
         public void Send(string code, DateTime timestamp, Dictionary<Enums.MeasureType, double> measurements)
@@ -59,12 +90,18 @@ namespace AMIAgregator
             if (!File.Exists(path))
                 File.WriteAllText(path, xmlString);
             else
-                File.AppendAllText(path, xmlString);
+                try
+                {
+                    File.AppendAllText(path, xmlString); // OVDE SAMO BACA EXCEPTION JER NE MOZE DA PISE U ISTO VREME
+                }
+                catch (Exception e)
+                {
 
+                }
             // Open the file to read from.
-           // string readText = File.ReadAllText(path);
-           // Console.WriteLine(readText);
-
+            // string readText = File.ReadAllText(path);
+            // Console.WriteLine(readText);
+            Console.WriteLine("Upisano je");
     
         }
 

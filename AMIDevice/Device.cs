@@ -1,9 +1,12 @@
-﻿using Common;
+﻿using AMISystemManagement;
+using Common;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using static Common.Enums;
 
 namespace AMIDevice
@@ -14,6 +17,8 @@ namespace AMIDevice
         public DateTime TimeStamp { get; set; }
         public Dictionary<MeasureType, double> measurements { get ; set ; }
        public State DeviceState { get; set; }
+
+        public static string gdeSeKacim;
         public Device()
         {
             Console.WriteLine("----Creating new Device----");
@@ -26,21 +31,36 @@ namespace AMIDevice
             measurements.Add(MeasureType.activePower, rand.Next(0,100));
             measurements.Add(MeasureType.reactivePower, rand.Next(0,100));
 
+            TimeStamp = DateTime.Now;
+
             bool choice = false;
 
-            do
-            {
+        //    do
+         //   {
               
                 Console.WriteLine("Choose Agreagator by name:");
-                foreach (var a in Datas.agregators.Keys)
+
+                string path = @"C:\Users\john\Desktop\RES\ProjectAMI\AMIAgregator\bin\nameOfAgregators.xml";
+
+                    string readText = File.ReadAllText(path);
+            
+
+
+                Console.WriteLine(readText);
+
+            foreach (KeyValuePair<MeasureType, double> a in measurements) // Ispis vrednosti trenutnih
+            {
+                Console.WriteLine(a.Key+" :"+a.Value);
+            }
+                /*
+            foreach (KeyValuePair<string, Dictionary<string, Dictionary<MeasureType, double>>> a in Datas.agregators)
                 {
-                    
-                    Console.WriteLine("- {1}", a);
-
+                    Console.WriteLine("- {0}", a.Key);
                 }
+                */
 
-                string name = Console.ReadLine();
-
+            gdeSeKacim = Console.ReadLine();
+                /*
                 if (!Datas.agregators.Keys.Contains(name))
                 {
                     Console.WriteLine("Wrong Agregator name!");
@@ -59,9 +79,9 @@ namespace AMIDevice
                     choice = true;
                 }
                 
+    */
 
-
-            } while (choice == false);
+           // } while (choice == false);
             Console.WriteLine("----New Device with code {0} is created----", DeviceCode);
         }
 

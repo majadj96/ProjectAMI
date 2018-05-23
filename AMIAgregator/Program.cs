@@ -13,18 +13,10 @@ namespace AMIAgregator
         static void Main(string[] args)
         {
 
-            IAMIAgregator agregator = new Agregator();
-            IAMIAgregator agregator1 = new Agregator();
-            IAMIAgregator agregator2 = new Agregator();
+            IAMIAgregator agregator = new Agregator(1);
 
-           /* Dictionary<MeasureType, double> d = new Dictionary<MeasureType, double>();
-            d.Add(MeasureType.voltage, 234);
-            d.Add(MeasureType.reactivePower, 32);
-            d.Add(MeasureType.activePower, 200);
-            d.Add(MeasureType.electricity, 100);
-
-
-            agregator.Send("23451240", DateTime.Now, d);*/
+            ServicePart service = new ServicePart();
+            service.Open();
 
             Console.ReadLine();
 
