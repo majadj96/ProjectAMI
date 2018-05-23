@@ -45,12 +45,12 @@ namespace AMIDevice
                     if (Console.ReadKey(true).Key == ConsoleKey.Escape)
                     {
                         device.turnOff();
-                        Console.WriteLine("Device is turned off : {0}", DateTime.Now);
+                        Console.WriteLine("Device is turned off at {0}", DateTime.Now);
                     }
                     if (Console.ReadKey(true).Key == ConsoleKey.Enter)
                     {
                         device.turnOn();
-                        Console.WriteLine("Device is turned on : {0}", DateTime.Now);
+                        Console.WriteLine("Device is turned on at {0}", DateTime.Now);
                     }
                 }
             });

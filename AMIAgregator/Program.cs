@@ -28,13 +28,13 @@ namespace AMIAgregator
                     if (Console.ReadKey(true).Key == ConsoleKey.Escape)
                     {
                         agregator.turnOff();
-                        Console.WriteLine("Device is turned off : {0}", DateTime.Now);
+                        Console.WriteLine("Agregator is turned off at {0}", DateTime.Now);
                         service.Close();
                     }
                     if (Console.ReadKey(true).Key == ConsoleKey.Enter)
                     {
                         agregator.turnOn();
-                        Console.WriteLine("Device is turned on : {0}", DateTime.Now);
+                        Console.WriteLine("Agregator is turned on at {0}", DateTime.Now);
                         service = new ServicePart();
                         service.Open();
                     }
