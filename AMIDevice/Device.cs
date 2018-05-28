@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Linq;
 using static Common.Enums;
 
 namespace AMIDevice
@@ -33,105 +34,29 @@ namespace AMIDevice
 
             TimeStamp = DateTime.Now;
 
-            bool choice = false;
+          Console.WriteLine("Choose Agreagator by name:");
 
-            do
+
+            using (var data = new AgregatorBaseDBContex())
             {
-                Console.WriteLine("Choose Agreagator by name:");
 
-                string path = @"..\..\..\AMIAgregator\bin\nameOfAgregators.xml";
+                var AgregatorBase = from d in data.AgregatorBaseData select d;
 
-                string[] listOfAgregators = new string[10];
-                string[] listOfDevices = new string[10];
-                int j = 0;
-               /* using (XmlReader reader = XmlReader.Create(path))
+                foreach(var lb in AgregatorBase)
                 {
-                    while (reader.Read())
-                    {
-                       // reader.MoveToContent();
-                        if (reader.Name == "code")
-                        {
-                            //reader.Read();
-                            listOfAgregators[j] = reader.Value.Trim();
-                            Console.WriteLine("*- {0}", listOfAgregators[j]);
-                            j++;
-                        }
-                    }
-                }*/
-
-               
-                 string readText = File.ReadAllText(path);
-
-                 string[] split = readText.Split('<','>');
-                 //Console.WriteLine(readText);
-                 
-                 for(int i = 2; i < split.Length; i = i + 4)
-                 {
-                     listOfAgregators[j] = split[i];
-                     j++;
-                     Console.WriteLine("- {0}", split[i]);
-                 }
-                myAgregator = Console.ReadLine();
-
-
-                 for (int i = 0; i < listOfAgregators.Length; i++) {
-                     if (listOfAgregators[i] == myAgregator)
-                     {
-                         choice = true;
-                         break;
-                     }
-
-                 }
-                if (!choice)
-                {
-                    Console.WriteLine("Wrong Agregator name!");
+                    Console.WriteLine(lb.Id +". " + lb.AgregatorCode);
                 }
-                else
-                {
-                    string pathOfDevices = @"..\..\..\AMIAgregator\bin\agregator"+myAgregator+".xml";
-                    if (!File.Exists(pathOfDevices))
-                    {
-                        string xmlString = $@"
-	                      <Code>{DeviceCode}</Code>
-                           ";
-                        File.WriteAllText(pathOfDevices, xmlString);
-                    }
-                    else
-                    {
-                        string readFile = File.ReadAllText(pathOfDevices);
-                        string[] splitDevices = readFile.Split('<', '>');
-                        //Console.WriteLine(readText);
-                        int d = 0;
-                        for (int i = 2; i < splitDevices.Length; i = i + 4)
-                        {
-                            listOfDevices[d] = splitDevices[i];
-                            d++;
-                        }
 
-                        bool exists = false;
-                        do
-                        {
-                            exists = false;
-                            foreach (string s in listOfDevices)
-                            {
-                                if (DeviceCode == s)
-                                {
-                                    DeviceCode = rand.Next(0, 100).ToString();
-                                    exists = true;
-                                    break;
-                                }
-                            }
-                        } while (exists);
+            }
 
-                        string xmlString = $@"
-	                    <Code>{DeviceCode}</Code>
-                         ";
+            string agregatorID = Console.ReadLine();
+            AgregatorBase entity;
+            using (var aData = new AgregatorBaseDBContex())
+            {
+                 entity = aData.AgregatorBaseData.Find(Int32.Parse(agregatorID));
+            }
 
-                        File.AppendAllText(pathOfDevices, xmlString);
-                    }
-                    Console.WriteLine("----New Device with code {0} is created----", DeviceCode);
-                }
-            } while (choice == false);
+            myAgregator = entity.AgregatorCode;
            
 
         }

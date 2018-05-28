@@ -23,95 +23,94 @@ namespace AMIAgregator
         public Agregator(int e)
         {
                 state = State.on;
-                Random r1 = new Random();
-                bool postoji = false;
                 Console.WriteLine("----Creating new Agregator----");
                 Random r = new Random();
                 port = "50"+r.Next(0,9) + r.Next(0, 9);
                 agregatorCode = port;
 
-                string path = @"..\nameOfAgregators.xml";
-                 string name = "agreagator" + agregatorCode; // svaki agregator pravi xml za svoje uredjaje 
-                string pathForDevices = @"..\" + name + ".xml";
-            bool added = false;
-            if (!File.Exists(path))
-            {
-                added = true;
-                string xmlString = $@"
-	                <Code>{agregatorCode}</Code>
-                    ";
-                File.WriteAllText(path, xmlString);
-            }
-            else
-            {
-                string readFile = File.ReadAllText(path);
 
-                string[] splitAgregators = readFile.Split('<', '>');
-                string[] listOfAgregators = new string[10];
+            bool exists = false;
 
-                //Console.WriteLine(readText);
-                int d = 0;
-                for (int i = 2; i < splitAgregators.Length; i = i + 4)
-                {
-                    listOfAgregators[d] = splitAgregators[i];
-                    d++;
-                }
-                bool ima = false;
+            using(var data = new AgregatorBaseDBContex())
+            {
                 do
                 {
-                    ima = false;
-                    foreach (string s in listOfAgregators)
+                    exists = false;
+                    foreach (var a in data.AgregatorBaseData)
                     {
-                        if (agregatorCode == s)
+                        if (a.AgregatorCode == agregatorCode)
                         {
-                            Console.WriteLine("Code {0} is already exists!", s);
-                            agregatorCode = ("50" + r.Next(0, 9) + r.Next(0, 9)).ToString();
-                            port = agregatorCode;
+                            Console.WriteLine("Agregator with that code already exist-> changing code..");
+                            port = "50" + r.Next(0, 9) + r.Next(0, 9);
+                            agregatorCode = port;
                             Console.WriteLine("New code is : {0}", agregatorCode);
-                            ima = true;
+                            exists = true;
                             break;
+                           
                         }
                     }
-                } while (ima);
-            }
-            if (!postoji)
-                {
+                } while (exists);
 
-                    Console.WriteLine("+New Agregator with " + agregatorCode + " is created");
-                if (!added)
+               
+
+                var AgregatorBase = new AgregatorBase
                 {
-                    string xmlString = $@"
-	                <Code>{agregatorCode}</Code>
-                    ";
-                    File.AppendAllText(path, xmlString);
-                }
+                   
+                    AgregatorCode = agregatorCode
+                };
+
+                data.AgregatorBaseData.Add(AgregatorBase);
+                data.SaveChanges();
 
             }
+
+
+              
         }
 
         public void Send(string code, DateTime timestamp, Dictionary<Enums.MeasureType, double> measurements,string codeAgr)
         {
 
-            string path = @"..\"+codeAgr+"_"+code+".xml"; // primer : 5001_274623.xml
-
-            string xmlString = $@"<Measure>
-	            <Timestamp>{timestamp.ToString()}</Timestamp> 
-            	<Voltage>{measurements[MeasureType.voltage]}</Voltage>
-            	<Electricity>{measurements[MeasureType.electricity]}</Electricity>
-            	<Activepower>{measurements[MeasureType.activePower]}</Activepower>
-            	<Reactivepower>{measurements[MeasureType.reactivePower]}</Reactivepower>
-                </Measure>
-                ";
-
-            // Add text to the file.
-            if (!File.Exists(path))
-                File.WriteAllText(path, xmlString);
-            else
+            using (var data = new LocalBaseDBContex())
             {
-                File.AppendAllText(path, xmlString); // OVDE SAMO BACA EXCEPTION JER NE MOZE DA PISE U ISTO VREME
-                Console.WriteLine("Upisano je");
+
+                LocalBase lb = new LocalBase()
+                {
+                    AgregatorCode = codeAgr,
+                    DeviceCode = code,
+                    TimeStamp = timestamp.ToString(),
+                    Voltage = measurements[MeasureType.voltage],
+                    Eletricity = measurements[MeasureType.electricity],
+                    ActivePower = measurements[MeasureType.activePower],
+                    ReactivePower = measurements[MeasureType.reactivePower]
+                };
+
+
+                data.LocalBaseData.Add(lb);
+                data.SaveChanges();
+
             }
-    
+
+            /* string path = @"..\"+codeAgr+"_"+code+".xml"; // primer : 5001_274623.xml
+
+             string xmlString = $@"<Measure>
+                 <Timestamp>{timestamp.ToString()}</Timestamp> 
+                 <Voltage>{measurements[MeasureType.voltage]}</Voltage>
+                 <Electricity>{measurements[MeasureType.electricity]}</Electricity>
+                 <Activepower>{measurements[MeasureType.activePower]}</Activepower>
+                 <Reactivepower>{measurements[MeasureType.reactivePower]}</Reactivepower>
+                 </Measure>
+                 ";
+
+             // Add text to the file.
+             if (!File.Exists(path))
+                 File.WriteAllText(path, xmlString);
+             else
+             {
+                 File.AppendAllText(path, xmlString); // OVDE SAMO BACA EXCEPTION JER NE MOZE DA PISE U ISTO VREME
+                 Console.WriteLine("Upisano je");
+             }*/
+
         }
 
         public void turnOff()
