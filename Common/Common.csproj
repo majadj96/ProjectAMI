@@ -52,8 +52,11 @@
     <Compile Include="AgregatorBaseDBContex.cs" />
     <Compile Include="Datas.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="GlobalBase.cs" />
+    <Compile Include="GlobalBaseDBContex.cs" />
     <Compile Include="IDevice.cs" />
     <Compile Include="IAMIAgregator.cs" />
+    <Compile Include="ISystemManagement.cs" />
     <Compile Include="LocalBase.cs" />
     <Compile Include="LocalBaseDBContex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
