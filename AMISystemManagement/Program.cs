@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,33 @@ namespace AMISystemManagement
     {
         static void Main(string[] args)
         {
+            ISystemManagement systemManagement = new SystemManagement(1);
+            ServicePart service = new ServicePart();
+            service.Open();
+
+            Task t1 = new Task(() =>
+            {
+                while (true)
+                {
+                    if (Console.ReadKey(true).Key == ConsoleKey.Escape)
+                    {
+                        systemManagement.turnOff();
+                        Console.WriteLine("System Management is turned off at {0}", DateTime.Now);
+                        service.Close();
+                    }
+                    if (Console.ReadKey(true).Key == ConsoleKey.Enter)
+                    {
+                        systemManagement.turnOn();
+                        Console.WriteLine("System Management is turned on at {0}", DateTime.Now);
+                        service = new ServicePart();
+                        service.Open();
+                    }
+                }
+            });
+
+            t1.Start();
+
+            Console.ReadKey();
         }
     }
 }

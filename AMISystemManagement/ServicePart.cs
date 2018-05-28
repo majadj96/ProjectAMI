@@ -6,16 +6,15 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AMIAgregator
+namespace AMISystemManagement
 {
     public class ServicePart
     {
         private static ServiceHost serviceHost;
-
         public ServicePart()
         {
-            serviceHost = new ServiceHost(typeof(Agregator));
-            serviceHost.AddServiceEndpoint(typeof(IAMIAgregator), new NetTcpBinding(), new Uri("net.tcp://localhost:"+Agregator.port+"/IAMIAgregator"));
+            serviceHost = new ServiceHost(typeof(SystemManagement));
+            serviceHost.AddServiceEndpoint(typeof(ISystemManagement), new NetTcpBinding(), new Uri("net.tcp://localhost:10100/ISystemManagement"));
         }
         public void Open()
         {
@@ -25,7 +24,6 @@ namespace AMIAgregator
 
         public void Close()
         {
-            Console.WriteLine("Service host is closed.");
             serviceHost.Close();
         }
 

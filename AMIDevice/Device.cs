@@ -17,29 +17,30 @@ namespace AMIDevice
         public string DeviceCode { get; set; }
         public DateTime TimeStamp { get; set; }
         public Dictionary<MeasureType, double> measurements { get ; set ; }
-       public State DeviceState { get; set; }
-
+        public State DeviceState { get; set; }
         public string myAgregator { get; set; }
+
         public Device()
         {
-            Console.WriteLine("----Creating new Device----");
-            DeviceState = State.on;
+            Console.WriteLine("-----------------Creating new Device------------------");
+            
             measurements = new Dictionary<MeasureType, double>();
             Random rand = new Random();
-            DeviceCode = rand.Next(200,10000).ToString(); // UMESTO HASH**
-            measurements.Add(MeasureType.electricity, rand.Next(0,30));// struja ide u rasponu od 0 do 30kWh
-            measurements.Add(MeasureType.voltage, rand.Next(0,240));//napon ide u rasponu od 0 do 240V
-            measurements.Add(MeasureType.activePower, rand.Next(0,100));
-            measurements.Add(MeasureType.reactivePower, rand.Next(0,100));
+            DeviceCode = rand.Next(200,10000).ToString();
 
             TimeStamp = DateTime.Now;
 
-          Console.WriteLine("Choose Agreagator by name:");
+            measurements.Add(MeasureType.electricity, rand.Next(0,30));
+            measurements.Add(MeasureType.voltage, rand.Next(0,240));
+            measurements.Add(MeasureType.activePower, rand.Next(0,100));
+            measurements.Add(MeasureType.reactivePower, rand.Next(0,100));
 
+            DeviceState = State.on;
 
+            Console.WriteLine("Choose Agreagator:");
+            
             using (var data = new AgregatorBaseDBContex())
             {
-
                 var AgregatorBase = from d in data.AgregatorBaseData select d;
 
                 foreach(var lb in AgregatorBase)
@@ -51,13 +52,17 @@ namespace AMIDevice
 
             string agregatorID = Console.ReadLine();
             AgregatorBase entity;
+
             using (var aData = new AgregatorBaseDBContex())
             {
                  entity = aData.AgregatorBaseData.Find(Int32.Parse(agregatorID));
             }
 
             myAgregator = entity.AgregatorCode;
-           
+
+            Console.WriteLine("Device is created with code [{0}] and agregator [{1}].", DeviceCode,myAgregator);
+            Console.WriteLine("------------------------------------------------------");
+            Console.WriteLine(" Start measuring..");
 
         }
 
