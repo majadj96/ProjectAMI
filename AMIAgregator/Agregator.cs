@@ -91,25 +91,7 @@ namespace AMIAgregator
 
             }
 
-            /* string path = @"..\"+codeAgr+"_"+code+".xml"; // primer : 5001_274623.xml
-
-             string xmlString = $@"<Measure>
-                 <Timestamp>{timestamp.ToString()}</Timestamp> 
-                 <Voltage>{measurements[MeasureType.voltage]}</Voltage>
-                 <Electricity>{measurements[MeasureType.electricity]}</Electricity>
-                 <Activepower>{measurements[MeasureType.activePower]}</Activepower>
-                 <Reactivepower>{measurements[MeasureType.reactivePower]}</Reactivepower>
-                 </Measure>
-                 ";
-
-             // Add text to the file.
-             if (!File.Exists(path))
-                 File.WriteAllText(path, xmlString);
-             else
-             {
-                 File.AppendAllText(path, xmlString); // OVDE SAMO BACA EXCEPTION JER NE MOZE DA PISE U ISTO VREME
-                 Console.WriteLine("Upisano je");
-             }*/
+            
 
         }
 
