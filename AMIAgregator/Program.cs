@@ -9,8 +9,9 @@ using static Common.Enums;
 
 namespace AMIAgregator
 {
-    class Program
+    public class Program
     {
+        public static ModelDBContex db = new ModelDBContex();
         static void Main(string[] args)
         {
 

@@ -8,6 +8,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Linq;
 using static Common.Enums;
 
 namespace AMIAgregator
@@ -15,79 +16,99 @@ namespace AMIAgregator
     class Agregator : IAMIAgregator
     {
         public string agregatorCode { get; set; }
-        public State state { get ; set; }
+        public State state { get; set; }
 
         public static string port;
 
         public Agregator() { }
         public Agregator(int e)
         {
-                state = State.on;
-                Random r1 = new Random();
-                bool postoji = false;
-                Console.WriteLine("----Creating new Agregator----");
-                Random r = new Random();
-                port = "50"+r.Next(0,9) + r.Next(0, 9);
-                agregatorCode = port;
+            state = State.on;
+            Random r1 = new Random();
+            bool postoji = false;
+            Console.WriteLine("----Creating new Agregator----");
+            Random r = new Random();
+            port = "50" + r.Next(0, 9) + r.Next(0, 9);
+            agregatorCode = port;
 
-                string path = @"..\nameOfAgregators.xml";
-                 string name = "agreagator" + agregatorCode; // svaki agregator pravi xml za svoje uredjaje 
-                string pathForDevices = @"..\" + name + ".xml";
-            bool added = false;
-            if (!File.Exists(path))
+
+            using (var db = new ModelDBContex())
             {
-                added = true;
-                string xmlString = $@"
-	                <Code>{agregatorCode}</Code>
-                    ";
-                File.WriteAllText(path, xmlString);
+                var model = new Model
+                {
+                    Code = agregatorCode
+                };
+
+                db.Modeli.Add(model);
+                db.SaveChanges();
             }
-            else
-            {
-                string readFile = File.ReadAllText(path);
 
-                string[] splitAgregators = readFile.Split('<', '>');
-                string[] listOfAgregators = new string[10];
 
-                //Console.WriteLine(readText);
-                int d = 0;
-                for (int i = 2; i < splitAgregators.Length; i = i + 4)
-                {
-                    listOfAgregators[d] = splitAgregators[i];
-                    d++;
-                }
-                bool ima = false;
-                do
-                {
-                    ima = false;
-                    foreach (string s in listOfAgregators)
-                    {
-                        if (agregatorCode == s)
-                        {
-                            Console.WriteLine("Code {0} is already exists!", s);
-                            agregatorCode = ("50" + r.Next(0, 9) + r.Next(0, 9)).ToString();
-                            port = agregatorCode;
-                            Console.WriteLine("New code is : {0}", agregatorCode);
-                            ima = true;
-                            break;
-                        }
-                    }
-                } while (ima);
-            }
-            if (!postoji)
-                {
 
-                    Console.WriteLine("+New Agregator with " + agregatorCode + " is created");
-                if (!added)
-                {
-                    string xmlString = $@"
-	                <Code>{agregatorCode}</Code>
-                    ";
-                    File.AppendAllText(path, xmlString);
-                }
 
-            }
+
         }
+    
+            
+
+
+
+            /*  string path = @"..\nameOfAgregators.xml";
+          bool added = false;
+          if (!File.Exists(path))
+          {
+              added = true;
+              string xmlString = $@"
+                  <Code>{agregatorCode}</Code>
+                  ";
+              File.WriteAllText(path, xmlString);
+          }
+          else
+          {
+              string readFile = File.ReadAllText(path);
+
+              string[] splitAgregators = readFile.Split('<', '>');
+              string[] listOfAgregators = new string[10];
+
+              //Console.WriteLine(readText);
+              int d = 0;
+              for (int i = 2; i < splitAgregators.Length; i = i + 4)
+              {
+                  listOfAgregators[d] = splitAgregators[i];
+                  d++;
+              }
+              bool ima = false;
+              do
+              {
+                  ima = false;
+                  foreach (string s in listOfAgregators)
+                  {
+                      if (agregatorCode == s)
+                      {
+                          Console.WriteLine("Code {0} is already exists!", s);
+                          agregatorCode = ("50" + r.Next(0, 9) + r.Next(0, 9)).ToString();
+                          port = agregatorCode;
+                          Console.WriteLine("New code is : {0}", agregatorCode);
+                          ima = true;
+                          break;
+                      }
+                  }
+              } while (ima);
+          }
+          if (!postoji)
+              {
+
+                  Console.WriteLine("+New Agregator with " + agregatorCode + " is created");
+              if (!added)
+              {
+                  string xmlString = $@"
+                  <Code>{agregatorCode}</Code>
+                  ";
+                  File.AppendAllText(path, xmlString);
+              }
+
+          }*/
+        
 
         public void Send(string code, DateTime timestamp, Dictionary<Enums.MeasureType, double> measurements,string codeAgr)
         {
