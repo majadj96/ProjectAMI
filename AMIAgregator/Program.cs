@@ -41,9 +41,10 @@ namespace AMIAgregator
 
             t1.Start();
 
-            Task t2 = new Task(() =>
+         
+            while (true)
             {
-                while (true)
+                if (agregator.state == Enums.State.on)
                 {
                     string path = @"..\configurabileTime.txt";
                     string text = System.IO.File.ReadAllText(path);
@@ -54,68 +55,65 @@ namespace AMIAgregator
                     Dictionary<string, List<Dictionary<Enums.MeasureType, double>>> deviceMeasurements = new Dictionary<string, List<Dictionary<MeasureType, double>>>();
                     List<Dictionary<Enums.MeasureType, double>> list = new List<Dictionary<MeasureType, double>>();
 
-                    if (agregator.state == Enums.State.on)
+                
+                    try
                     {
-                        try
+                        using (var data = new LocalBaseDBContex())
                         {
-                            using (var data = new LocalBaseDBContex())
+                            var AgregatorBase = from d in data.LocalBaseData select d;
+
+                            foreach (var lb in AgregatorBase)
                             {
-                                var AgregatorBase = from d in data.LocalBaseData select d;
-
-                                foreach (var lb in AgregatorBase)
+                                if (lb.AgregatorCode == agregator.agregatorCode)
                                 {
-                                    if (lb.AgregatorCode == agregator.agregatorCode)
-                                    {
-                                        Dictionary<MeasureType, double> measurement = new Dictionary<MeasureType, double>();
-                                        measurement.Add(MeasureType.voltage, lb.Voltage);
-                                        measurement.Add(MeasureType.electricity, lb.Eletricity);
-                                        measurement.Add(MeasureType.reactivePower, lb.ReactivePower);
-                                        measurement.Add(MeasureType.activePower, lb.ActivePower);
-                                        list.Add(measurement);
-                                        deviceMeasurements[lb.DeviceCode]=list;
-                                    }
+                                    Dictionary<MeasureType, double> measurement = new Dictionary<MeasureType, double>();
+                                    measurement.Add(MeasureType.voltage, lb.Voltage);
+                                    measurement.Add(MeasureType.electricity, lb.Eletricity);
+                                    measurement.Add(MeasureType.reactivePower, lb.ReactivePower);
+                                    measurement.Add(MeasureType.activePower, lb.ActivePower);
+                                    list.Add(measurement);
+                                    deviceMeasurements[lb.DeviceCode]=list;
                                 }
-
                             }
 
-                            agregatorDataLocal[DateTime.Now] = deviceMeasurements;
-
-                            CreateChannelAgregator.proxy = CreateChannelAgregator.factory.CreateChannel();
-                            CreateChannelAgregator.proxy.Send(agregator.agregatorCode,agregatorDataLocal);
-                            Console.WriteLine("Measurements for Agregator [{0}] are sent.", agregator.agregatorCode);
-
-                            using (var data = new LocalBaseDBContex())
-                            {
-                            
-                            
-                                var AgregatorBase = from d in data.LocalBaseData select d;
-
-                            
-                                foreach (var lb in AgregatorBase)
-                                {
-                                    if (lb.AgregatorCode == agregator.agregatorCode)
-                                    {
-                                        data.LocalBaseData.Remove(lb);
-                                        
-                                    }
-                                }
-                                Console.WriteLine("Measurements for Agregator [{0}] are deleted from LocalDataBase.", agregator.agregatorCode);
-                                data.SaveChanges();
-                            }
-                            
-
                         }
-                        catch (Exception e)
+
+                        agregatorDataLocal[DateTime.Now] = deviceMeasurements;
+
+                        CreateChannelAgregator.proxy = CreateChannelAgregator.factory.CreateChannel();
+                        CreateChannelAgregator.proxy.Send(agregator.agregatorCode,agregatorDataLocal);
+                        Console.WriteLine("Measurements for Agregator [{0}] are sent.", agregator.agregatorCode);
+
+                        using (var data = new LocalBaseDBContex())
                         {
-                            Console.WriteLine("System Management is off");
+                        
+                        
+                            var AgregatorBase = from d in data.LocalBaseData select d;
 
+                        
+                            foreach (var lb in AgregatorBase)
+                            {
+                                if (lb.AgregatorCode == agregator.agregatorCode)
+                                {
+                                    data.LocalBaseData.Remove(lb);
+                                    
+                                }
+                            }
+                            Console.WriteLine("Measurements for Agregator [{0}] are deleted from LocalDataBase.", agregator.agregatorCode);
+                            data.SaveChanges();
                         }
-                    
+                        
+
                     }
-                }
-            });
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("System Management is off");
 
-            t2.Start();
+                    }
+                
+                }
+            }
+         
 
 
             Console.ReadLine();

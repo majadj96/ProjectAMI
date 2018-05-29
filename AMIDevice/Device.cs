@@ -60,9 +60,33 @@ namespace AMIDevice
 
             myAgregator = entity.AgregatorCode;
 
+
+            bool exists = false;
+
+            using (var lData = new LocalBaseDBContex())
+            {
+                do
+                {
+                    exists = false;
+                    foreach (var lb in lData.LocalBaseData)
+                    {
+                        if (lb.AgregatorCode == myAgregator && lb.DeviceCode == DeviceCode)
+                        {
+                            Console.WriteLine("Device with that code already exist-> changing code..");
+                            DeviceCode = rand.Next(200, 10000).ToString();
+                            Console.WriteLine("New code is : {0}", DeviceCode);
+                            exists = true;
+                            break;
+                        }
+
+                    }
+                } while (exists);
+
+            }
+            
             Console.WriteLine("Device is created with code [{0}] and agregator [{1}].", DeviceCode,myAgregator);
             Console.WriteLine("------------------------------------------------------");
-            Console.WriteLine(" Start measuring..");
+            Console.WriteLine("Start measuring..");
 
         }
 

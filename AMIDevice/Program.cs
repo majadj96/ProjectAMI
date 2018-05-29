@@ -47,32 +47,29 @@ namespace AMIDevice
 
             t1.Start();
 
-            Task t2 = new Task(() =>
+        
+            while (true)
             {
-                while (true)
+            
+                if (device.DeviceState == Enums.State.on)
                 {
-               
-                    if (device.DeviceState == Enums.State.on)
+                    Thread.Sleep(30000);
+                    try
                     {
-                        Thread.Sleep(30000);
-                        try
-                        {
-                            CreateChannelDevice.proxy = CreateChannelDevice.factory.CreateChannel();
-                            CreateChannelDevice.proxy.Send(device.DeviceCode, device.TimeStamp, device.measurements, device.myAgregator);
-                            Console.WriteLine("Message sent in {0}.",device.TimeStamp);
-                        }catch(Exception e)
-                        {
-                            Console.WriteLine("Agregator is not available at the moment, please try later.");
+                        CreateChannelDevice.proxy = CreateChannelDevice.factory.CreateChannel();
+                        CreateChannelDevice.proxy.Send(device.DeviceCode, device.TimeStamp, device.measurements, device.myAgregator);
+                        Console.WriteLine("Message sent in {0}.",device.TimeStamp);
+                    }catch(Exception e)
+                    {
+                        Console.WriteLine("Agregator is not available at the moment, please try later.");
 
-                        }
-                        Update(device);
-               
                     }
+                    
+            
                 }
-            });
-
-            t2.Start();
-
+                Update(device);
+            }
+         
             Console.ReadKey();
         }
         
