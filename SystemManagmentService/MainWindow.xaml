@@ -5,17 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SystemManagmentService"
         mc:Ignorable="d"
-        Title="System Managment Service" Height="674.5" Width="1418.25">
+        Title="System Managment Service" Height="406.368" Width="823.185">
+    <Window.Resources>
+        <Style x:Key="MyButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" BorderThickness="0" BorderBrush="Black" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.8" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="Pictures/background1.jpg"/>
         </Grid.Background>
+        <Button x:Name="first" Content="......................................................................"  Margin="0,101,0,0"   Style="{StaticResource MyButton}" HorizontalAlignment="Left" Height="42"  VerticalAlignment="Top" Width="485" FontSize="27" FontFamily="Segoe Print" Click="Button_Click1"  TextOptions.TextHintingMode="Animated" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}"/>
+        <Button x:Name="second"  Content="......................................................................"  Margin="2,149,0,0"   Style="{StaticResource MyButton}" HorizontalAlignment="Left" Height="42"  VerticalAlignment="Top" Width="526" FontSize="27" FontFamily="Segoe Print" Click="Button_Click2"  TextOptions.TextHintingMode="Animated" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}"/>
+        <Button x:Name="third"  Content="......................................................................" Margin="2,195,0,0"   Style="{StaticResource MyButton}" HorizontalAlignment="Left" Height="42"  VerticalAlignment="Top" Width="500" FontSize="27" FontFamily="Segoe Print" Click="Button_Click3"  TextOptions.TextHintingMode="Animated" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}"/>
+        <Button x:Name="fourth"  Content="......................................................................"  Margin="2,243,0,0"   Style="{StaticResource MyButton}" HorizontalAlignment="Left" Height="42"  VerticalAlignment="Top" Width="526" FontSize="27" FontFamily="Segoe Print" Click="Button_Click4"  TextOptions.TextHintingMode="Animated" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}"/>
+        <Button x:Name="fifth"  Content="......................................................................"  Margin="2,285,0,0"   Style="{StaticResource MyButton}" HorizontalAlignment="Left" Height="42"  VerticalAlignment="Top" Width="272" FontSize="27" FontFamily="Segoe Print" Click="Button_Click5"  TextOptions.TextHintingMode="Animated" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}"/>
 
-        <Button Margin="10,191,1341,397" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click1"></Button>
-        <Button Margin="10,278,1341,319" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click2"/>
-        <Button Margin="0,347,1341,243" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click3"/>
-        <Button Margin="0,432,1341,164" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click4"/>
-        <Button Margin="0,503,1341,91" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click5"/>
 
     </Grid>
 </Window>

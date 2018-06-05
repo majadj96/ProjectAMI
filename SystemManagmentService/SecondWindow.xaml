@@ -1,0 +1,213 @@
+﻿<Window x:Class="SystemManagmentService.SecondWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SystemManagmentService"
+        mc:Ignorable="d"
+        Title="SecondWindow"  Height="691.164" Width="1195.261">
+    <Window.Background>
+        <ImageBrush ImageSource="Pictures/backgroundsmall.jpg"/>
+    </Window.Background>
+    <Grid>
+        <ComboBox x:Name="MeasurementType" HorizontalAlignment="Left" Height="32" Margin="27,31,0,0" VerticalAlignment="Top" Width="146"/>
+        <Label Content="MeasurementType" FontSize="17" HorizontalAlignment="Left" Height="42" Margin="27,0,0,0" VerticalAlignment="Top" Width="160"/>
+        <ComboBox x:Name="AgregatorCombo" HorizontalAlignment="Left" Height="32" Margin="239,31,0,0" VerticalAlignment="Top" Width="175"/>
+        <Label Content="Agregator" FontSize="17" HorizontalAlignment="Left" Height="39" Margin="270,3,0,0" VerticalAlignment="Top" Width="96"/>
+        <DatePicker x:Name="dataPicker" HorizontalAlignment="Left" Height="32" Margin="499,31,0,0" VerticalAlignment="Top" Width="123" RenderTransformOrigin="0.5,0.5">
+            <DatePicker.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.223"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </DatePicker.RenderTransform>
+        </DatePicker>
+        <Button Content="GO!" x:Name="draw" HorizontalAlignment="Left" Height="32" Margin="679,31,0,0" VerticalAlignment="Top" Width="63" Click="draw_Click"/>
+        <Label Content="Label" x:Name="L" HorizontalAlignment="Left" Height="48" Margin="851,24,0,0" VerticalAlignment="Top" Width="182"/>
+
+
+
+        <ScrollViewer Name="GrafTab" Visibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden" Margin="0,341,30,40">
+            <Canvas HorizontalAlignment="Left" Background="PapayaWhip" Height="370" Margin="20,45,0,0" VerticalAlignment="Top" Width="48000">
+
+                <Canvas x:Name="CGraph" Height="330" Canvas.Left="30" Width="1570">
+
+
+                </Canvas>
+
+                <!--velika gore-->
+                <Line 
+					X1="30" Y1="330"
+					X2="30" Y2="5" 
+					Stroke="Black"/>
+                <!--velika desno-->
+                <Line
+					X1="30" Y1="330"
+					X2="47730" Y2="330" 
+					Stroke="Black"/>
+                <!--male gore-->
+                <Line
+					X1="20" Y1="25"
+					X2="30" Y2="5"
+					Stroke="Black"
+					/>
+                <Line
+					X1="40" Y1="25"
+					X2="30" Y2="5"
+					Stroke="Black"/>
+                <!--male desno vrh-->
+                <Line
+					X1="47720" Y1="320"
+					X2="47735" Y2="330"
+					Stroke="Black"/>
+                <Line
+					X1="47720" Y1="340"
+					X2="47735" Y2="330"
+					Stroke="Black"/>
+                <!--male desno vrednost-->
+                <Line
+					X1="2020" Y1="320"
+					X2="2020" Y2="340" 
+					Stroke="Black"/>
+                <Line
+					X1="4010" Y1="320"
+					X2="4010" Y2="340" 
+					Stroke="Black"/>
+                <Line
+					X1="6000" Y1="320"
+					X2="6000" Y2="340" 
+					Stroke="Black"/>
+                <Line
+					X1="7990" Y1="320"
+					X2="7990" Y2="340" 
+					Stroke="Black"/>
+                <Line
+					X1="9980" Y1="320"
+					X2="9980" Y2="340" 
+					Stroke="Black"/>
+                <Line
+					X1="11970" Y1="320"
+					X2="11970" Y2="340" 
+					Stroke="Black"/>
+                <Line
+					X1="13960" Y1="320"
+					X2="13960" Y2="340" 
+					Stroke="Black"/>
+                <Line
+					X1="15950" Y1="320"
+					X2="15950" Y2="340" 
+					Stroke="Black"/>
+                <Line
+					X1="17940" Y1="320"
+					X2="17940" Y2="340" 
+					Stroke="Black"/>
+                <Line
+					X1="19930" Y1="320"
+					X2="19930" Y2="340" 
+					Stroke="Black"/>
+                <Line
+					X1="21920" Y1="320"
+					X2="21920" Y2="340" 
+					Stroke="Black"/>
+                <Line
+					X1="23910" Y1="320"
+					X2="23910" Y2="340" 
+					Stroke="Black"/>
+                <Line
+					X1="25900" Y1="320"
+					X2="25900" Y2="340" 
+					Stroke="Black"/>
+                <Line
+					X1="27890" Y1="320"
+					X2="27890" Y2="340" 
+					Stroke="Black"/>
+                <Line
+					X1="29880" Y1="320"
+					X2="29880" Y2="340" 
+					Stroke="Black"/>
+                <Line
+					X1="31870" Y1="320"
+					X2="31870" Y2="340" 
+					Stroke="Black"/>
+                <Line
+					X1="33860" Y1="320"
+					X2="33860" Y2="340" 
+					Stroke="Black"/>
+                <Line
+					X1="35870" Y1="320"
+					X2="35870" Y2="340" 
+					Stroke="Black"/>
+                <Line
+					X1="37860" Y1="320"
+					X2="37860" Y2="340" 
+					Stroke="Black"/>
+                <Line
+					X1="39850" Y1="320"
+					X2="39850" Y2="340" 
+					Stroke="Black"/>
+                <Line
+					X1="41840" Y1="320"
+					X2="41840" Y2="340" 
+					Stroke="Black"/>
+                <Line
+					X1="43830" Y1="320"
+					X2="43830" Y2="340" 
+					Stroke="Black"/>
+                <Line
+					X1="45820" Y1="320"
+					X2="45820" Y2="340" 
+					Stroke="Black"/>
+                <Line
+					X1="47715" Y1="320"
+					X2="47715" Y2="340" 
+					Stroke="Black"/>
+                <Line
+					X1="25" Y1="230"
+					X2="35" Y2="230" 
+					Stroke="Black"/>
+                <Line
+					X1="25" Y1="130"
+					X2="35" Y2="130" 
+					Stroke="Black"/>
+                <Line
+					X1="25" Y1="30"
+					X2="35" Y2="30" 
+					Stroke="Black"/>
+                <Label x:Name="label1" Content="00:00&#xD;&#xA;" Canvas.Left="10" Canvas.Top="335" Width="46"/>
+                <Label x:Name="label2" Content="01:00&#xD;&#xA;" Canvas.Left="2002" Canvas.Top="340"/>
+                <Label x:Name="label3" Content="02:00&#xD;&#xA;" Canvas.Left="3991" Canvas.Top="340"/>
+                <Label x:Name="label4" Content="03:00&#xD;&#xA;" Canvas.Left="5982" Canvas.Top="340"/>
+                <Label x:Name="label5" Content="04:00&#xD;&#xA;" Canvas.Left="7971" Canvas.Top="340"/>
+                <Label x:Name="label6" Content="05:00&#xD;&#xA;" Canvas.Left="9961" Canvas.Top="340"/>
+                <Label x:Name="label7" Content="06:00&#xD;&#xA;" Canvas.Left="11952" Canvas.Top="340"/>
+                <Label x:Name="label8" Content="07:00&#xD;&#xA;" Canvas.Left="13942" Canvas.Top="340"/>
+                <Label x:Name="label9" Content="08:00&#xD;&#xA;&#xD;&#xA;" Canvas.Left="15932" Canvas.Top="340"/>
+                <Label x:Name="label10" Content="09:00&#xD;&#xA;&#xD;&#xA;" Canvas.Left="17922" Canvas.Top="340"/>
+                <Label x:Name="label11" Content="10:00&#xD;&#xA;&#xD;&#xA;" Canvas.Left="19910" Canvas.Top="340"/>
+                <Label x:Name="label12" Content="11:00&#xD;&#xA;" Canvas.Left="21901" Canvas.Top="340"/>
+                <Label x:Name="label13" Content="12:00&#xD;&#xA;" Canvas.Left="23891" Canvas.Top="340"/>
+                <Label x:Name="label14" Content="13:00&#xD;&#xA;" Canvas.Left="25880" Canvas.Top="340"/>
+                <Label x:Name="label15" Content="14:00&#xD;&#xA;" Canvas.Left="27872" Canvas.Top="340"/>
+                <Label x:Name="label16" Content="15:00&#xD;&#xA;" Canvas.Left="29860" Canvas.Top="340"/>
+                <Label x:Name="label17" Content="16:00&#xD;&#xA;" Canvas.Left="31852" Canvas.Top="340"/>
+                <Label x:Name="label18" Content="17:00&#xD;&#xA;" Canvas.Left="33839" Canvas.Top="340"/>
+                <Label x:Name="label19" Content="18:00&#xD;&#xA;" Canvas.Left="35851" Canvas.Top="340"/>
+                <Label x:Name="label20" Content="19:00&#xD;&#xA;" Canvas.Left="37841" Canvas.Top="340"/>
+                <Label x:Name="label21" Content="20:00&#xD;&#xA;" Canvas.Left="39830" Canvas.Top="340"/>
+                <Label x:Name="label22" Content="21:00&#xD;&#xA;" Canvas.Left="41820" Canvas.Top="340"/>
+                <Label x:Name="label23" Content="22:00&#xD;&#xA;&#xD;&#xA;" Canvas.Left="43812" Canvas.Top="340"/>
+                <Label x:Name="label24" Content="23:00&#xD;&#xA;" Canvas.Left="45801" Canvas.Top="340"/>
+                <Label x:Name="label25" Content="00:00&#xD;&#xA;&#xD;&#xA;" Canvas.Left="47692" Canvas.Top="340"/>
+                <Label x:Name="LMaxValue" Content="" FontSize="15" Canvas.Left="-18" Canvas.Top="10" Height="32" Width="43"/>
+                <Label x:Name="LAvgValue" Content="" FontSize="15" Canvas.Left="-18" Canvas.Top="116" Height="32" Width="43"/>
+                <Label x:Name="LMinValue" Content="" FontSize="15" Canvas.Left="-18" Canvas.Top="215" Height="32" Width="43"/>
+
+            </Canvas>
+        </ScrollViewer>
+
+
+
+    </Grid>
+</Window>
