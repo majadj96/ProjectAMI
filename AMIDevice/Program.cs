@@ -58,7 +58,7 @@ namespace AMIDevice
                     {
                         CreateChannelDevice.proxy = CreateChannelDevice.factory.CreateChannel();
                         CreateChannelDevice.proxy.Send(device.DeviceCode, device.TimeStamp, device.measurements, device.myAgregator);
-                        Console.WriteLine("Message sent in {0}.",device.TimeStamp);
+                        Console.WriteLine("Message sent in {0}.",Datas.UnixTimeToDateTime(device.TimeStamp));
                     }catch(Exception e)
                     {
                         Console.WriteLine("Agregator is not available at the moment, please try later.");
