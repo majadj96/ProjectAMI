@@ -68,9 +68,10 @@ namespace AMIAgregator
                     int time = Int32.Parse(text);
                     Thread.Sleep(time * 60000);
 
-                    Dictionary<DateTime, Dictionary<string, List<Dictionary<Enums.MeasureType, double>>>> agregatorDataLocal = new Dictionary<DateTime, Dictionary<string, List<Dictionary<MeasureType, double>>>>();
-                    Dictionary<string, List<Dictionary<Enums.MeasureType, double>>> deviceMeasurements = new Dictionary<string, List<Dictionary<MeasureType, double>>>();
-                    List<Dictionary<Enums.MeasureType, double>> list = new List<Dictionary<MeasureType, double>>();
+                    Dictionary<DateTime, Dictionary<string, Dictionary<DateTime, Dictionary<Enums.MeasureType, double>>>> agregatorDataLocal = new Dictionary<DateTime, Dictionary<string, Dictionary<DateTime, Dictionary<MeasureType, double>>>>();
+
+                    Dictionary<string, Dictionary<DateTime, Dictionary<Enums.MeasureType, double>>> deviceMeasurements = new Dictionary<string, Dictionary<DateTime, Dictionary<MeasureType, double>>>();
+                    Dictionary<DateTime, Dictionary<Enums.MeasureType, double>> list = new Dictionary<DateTime, Dictionary<MeasureType, double>>();
 
                 
                     try
@@ -88,7 +89,7 @@ namespace AMIAgregator
                                     measurement.Add(MeasureType.electricity, lb.Eletricity);
                                     measurement.Add(MeasureType.reactivePower, lb.ReactivePower);
                                     measurement.Add(MeasureType.activePower, lb.ActivePower);
-                                    list.Add(measurement);
+                                    list.Add(DateTime.Parse(lb.TimeStamp),measurement);
                                     deviceMeasurements[lb.DeviceCode]=list;
                                 }
                             }

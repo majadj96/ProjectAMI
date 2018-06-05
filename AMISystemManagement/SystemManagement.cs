@@ -19,33 +19,37 @@ namespace AMISystemManagement
             state = State.on;
         }
 
-        public void Send(string agregatorCode, Dictionary<DateTime, Dictionary<string, List<Dictionary<Enums.MeasureType, double>>>> agregatorData)
+        public void Send(string agregatorCode, Dictionary<DateTime, Dictionary<string, Dictionary<DateTime, Dictionary<Enums.MeasureType, double>>>> agregatorData)
         {
             using (var data = new GlobalBaseDBContex())
             {
-                foreach(KeyValuePair<DateTime,Dictionary<string, List<Dictionary<Enums.MeasureType, double>>>> prvi in agregatorData)
+                foreach(KeyValuePair<DateTime,Dictionary<string, Dictionary<DateTime, Dictionary<Enums.MeasureType, double>>>> prvi in agregatorData)
                 {
                     
-                    foreach(KeyValuePair<string, List<Dictionary<Enums.MeasureType, double>>> drugi in prvi.Value)
+                    foreach(KeyValuePair<string, Dictionary<DateTime, Dictionary<Enums.MeasureType, double>>> drugi in prvi.Value)
                     {
-                        for(int i=0; i < drugi.Value.Count; i++)
-                        {
-                          
+                        foreach (KeyValuePair<DateTime, Dictionary<Enums.MeasureType, double>> treci in drugi.Value) {
+
+                              
                                 GlobalBase gb = new GlobalBase()
                                 {
                                     AgregatorCode = agregatorCode,
                                     TimeStamp = prvi.Key.ToString(),
                                     DeviceCode = drugi.Key,
-                                    Voltage = drugi.Value[i][MeasureType.voltage],
-                                    Eletricity = drugi.Value[i][MeasureType.electricity],
-                                    ActivePower = drugi.Value[i][MeasureType.activePower],
-                                    ReactivePower = drugi.Value[i][MeasureType.reactivePower]
-                                    
+                                    DeviceTime = treci.Key.ToString(),
+                                    Voltage = treci.Value[MeasureType.voltage],
+                                    Eletricity = treci.Value[MeasureType.electricity],
+                                    ActivePower = treci.Value[MeasureType.activePower],
+                                    ReactivePower = treci.Value[MeasureType.reactivePower]
+
                                 };
 
-                            data.GlobalBaseData.Add(gb);
-                            data.SaveChanges();
+                                data.GlobalBaseData.Add(gb);
+                                data.SaveChanges();
+                            
+
                         }
+                        
                         
                     }
                 }

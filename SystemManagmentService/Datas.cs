@@ -9,7 +9,8 @@ namespace SystemManagmentService
 {
    public class Datas
     {
-        public static List<String> type = new List<String>() { "Voltage", "Eletricity", "Active power","Reactve power" };
+        public static List<String> type = new List<String>() { "Voltage", "Eletricity", "Active power","Reactive power" };
+        public static List<String> operators = new List<String>() { ">", "<"};
 
         public static List<String> agregatorsCombo = new List<string>();
         public static List<String> devicesCombo = new List<string>();

@@ -16,9 +16,10 @@ namespace Common
         void turnOn();
         void turnOff();
         [OperationContract]
-        void Send(string agregatorCode,Dictionary<DateTime, Dictionary< string, List<Dictionary<MeasureType,double>>>> agregatorData); 
+        void Send(string agregatorCode, Dictionary<DateTime, Dictionary<string, Dictionary<DateTime, Dictionary<Enums.MeasureType, double>>>> agregatorData);
 
 
-        
+
+
     }
 }

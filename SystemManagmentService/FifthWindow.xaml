@@ -10,6 +10,23 @@
         <ImageBrush ImageSource="Pictures/backgroundsmall.jpg"/>
     </Window.Background>
     <Grid>
-        
+        <ComboBox x:Name="MeasurementType" HorizontalAlignment="Left" Height="32" Margin="27,33,0,0" VerticalAlignment="Top" Width="146"/>
+        <ComboBox x:Name="DeviceCombo" HorizontalAlignment="Left" Height="32" Margin="113,133,0,0" VerticalAlignment="Top" Width="146"/>
+        <Label Content="Device" FontSize="17" HorizontalAlignment="Left" Height="42" Margin="113,91,0,0" VerticalAlignment="Top" Width="160"/>
+        <TextBox x:Name="Ispis" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" IsReadOnly="True" Height="422" Margin="10,207,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="1150" FontFamily="Segoe Print" FontSize="17" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+
+        <ComboBox x:Name="Operator" HorizontalAlignment="Left" Height="32" Margin="251,33,0,0" VerticalAlignment="Top" Width="146"/>
+        <Label Content="MeasurementType" FontSize="17" HorizontalAlignment="Left" Height="42" Margin="27,0,0,0" VerticalAlignment="Top" Width="160"/>
+
+        <Label Content="Operator" FontSize="17" HorizontalAlignment="Left" Height="42" Margin="251,0,0,0" VerticalAlignment="Top" Width="160"/>
+        <TextBox x:Name="Value"  HorizontalAlignment="Left" Height="32" Margin="450,33,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="90"/>
+        <Label Content="Value" FontSize="17" HorizontalAlignment="Left" Height="42" Margin="450,4,0,0" VerticalAlignment="Top" Width="160"/>
+        <DatePicker x:Name="datePickerStart" HorizontalAlignment="Left" Height="68" Margin="638,65,0,0" VerticalAlignment="Top" Width="208"/>
+        <DatePicker x:Name="datePickerEnd" HorizontalAlignment="Left" Height="68" Margin="884,65,0,0" VerticalAlignment="Top" Width="174"/>
+        <Label Content="Start" FontSize="17" HorizontalAlignment="Left" Height="42" Margin="686,24,0,0" VerticalAlignment="Top" Width="160"/>
+        <Label Content="End" FontSize="17" HorizontalAlignment="Left" Height="42" Margin="918,24,0,0" VerticalAlignment="Top" Width="160"/>
+        <Button Content="GO!" HorizontalAlignment="Left" Height="51" Margin="1083,42,0,0" VerticalAlignment="Top" Width="55" Click="Button_Click"/>
+
+
     </Grid>
 </Window>

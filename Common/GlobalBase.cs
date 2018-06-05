@@ -17,9 +17,11 @@ namespace Common
         public string AgregatorCode { get; set; }
         public string TimeStamp { get; set; }
         public string DeviceCode { get; set; }
+        public string  DeviceTime { get; set; }
         public double Voltage { get; set; }
         public double Eletricity { get; set; }
         public double ActivePower { get; set; }
         public double ReactivePower { get; set; }
+        
     }
 }

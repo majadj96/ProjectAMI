@@ -33,8 +33,7 @@ namespace SystemManagmentService
 
         private void Button_Click1(object sender, RoutedEventArgs e)
         {
-
-
+            Datas.devicesCombo = Datas.loadDevicesFromDataBase();
             FirstWindow w = new FirstWindow();
             w.ShowDialog();
         }
@@ -55,6 +54,7 @@ namespace SystemManagmentService
 
         private void Button_Click4(object sender, RoutedEventArgs e)
         {
+            Datas.agregatorsCombo = Datas.loadAgregatorsFromDataBase();
             FourthWindow w = new FourthWindow();
             w.ShowDialog();
 
@@ -62,6 +62,7 @@ namespace SystemManagmentService
 
         private void Button_Click5(object sender, RoutedEventArgs e)
         {
+            Datas.devicesCombo = Datas.loadDevicesFromDataBase();
             FifthWindow w = new FifthWindow();
             w.ShowDialog();
         }

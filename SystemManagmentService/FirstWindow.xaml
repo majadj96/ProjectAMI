@@ -4,12 +4,42 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SystemManagmentService"
+         xmlns:DV="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+        xmlns:DVC="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+        
         mc:Ignorable="d"
         Title="FirstWindow" Height="691.164" Width="1195.261">
+    <Window.Background>
+        <ImageBrush ImageSource="Pictures/backgroundsmall.jpg"/>
+    </Window.Background>
     <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="Pictures/backgroundsmall.jpg"/>
-        </Grid.Background>
+        <DVC:Chart Name="mcChart" Margin="0,119,62,0" BorderBrush="Transparent" >
+            <DVC:Chart.Series >
+                <DVC:ColumnSeries Title="Sum"
+                    IndependentValueBinding="{Binding Path=Key}"
+                    DependentValueBinding="{Binding Path=Value}">
+                </DVC:ColumnSeries>
+            </DVC:Chart.Series>
+
+        </DVC:Chart>
+
+        <ComboBox x:Name="MeasurementType" HorizontalAlignment="Left" Height="32" Margin="27,33,0,0" VerticalAlignment="Top" Width="146"/>
+        <Label Content="MeasurementType" FontSize="17" HorizontalAlignment="Left" Height="42" Margin="27,0,0,0" VerticalAlignment="Top" Width="160"/>
+        <ComboBox x:Name="DeviceCombo" HorizontalAlignment="Left" Height="32" Margin="239,31,0,0" VerticalAlignment="Top" Width="175"/>
+        <Label Content="Device" FontSize="17" HorizontalAlignment="Left" Height="39" Margin="270,3,0,0" VerticalAlignment="Top" Width="96"/>
+        <DatePicker x:Name="dataPicker" HorizontalAlignment="Left" Height="32" Margin="499,31,0,0" VerticalAlignment="Top" Width="123" RenderTransformOrigin="0.5,0.5">
+            <DatePicker.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.223"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </DatePicker.RenderTransform>
+        </DatePicker>
+        <Button Content="GO!" x:Name="draw" HorizontalAlignment="Left" Height="32" Margin="679,31,0,0" VerticalAlignment="Top" Width="63" Click="draw_Click"/>
+
+
 
     </Grid>
 </Window>
