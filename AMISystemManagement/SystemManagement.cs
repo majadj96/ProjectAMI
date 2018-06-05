@@ -51,6 +51,8 @@ namespace AMISystemManagement
                 }
                 
             }
+
+            Console.WriteLine("Measurements for Agregator [{0}] are added in GlobalDataBase.", agregatorCode);
         }
 
         public void turnOff()

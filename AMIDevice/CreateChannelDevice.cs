@@ -13,6 +13,7 @@ namespace AMIDevice
 
         public static IAMIAgregator proxy;
         public static ChannelFactory<IAMIAgregator> factory;
+
         public CreateChannelDevice(string port)
         {
             factory = new ChannelFactory<IAMIAgregator>(new NetTcpBinding(), new EndpointAddress("net.tcp://localhost:"+port+"/IAMIAgregator"));

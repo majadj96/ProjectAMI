@@ -16,23 +16,16 @@ namespace AMIDevice
         public static void Update(IDevice d)
         {
             Random rand = new Random();
-            d.measurements[Enums.MeasureType.electricity]= rand.Next(0, 34);// struja ide u rasponu od 0 do 30kWh
+            d.measurements[Enums.MeasureType.electricity]= rand.Next(0, 34);
             d.measurements[Enums.MeasureType.voltage] = rand.Next(0, 244);
             d.measurements[Enums.MeasureType.activePower] = rand.Next(0, 102);
             d.measurements[Enums.MeasureType.reactivePower] = rand.Next(0, 103);
-            d.TimeStamp = DateTime.Now;
+            d.TimeStamp = Datas.ConvertToUnixTime(DateTime.Now);
         }
 
         static void Main(string[] args)
         {
             IDevice device = new Device();
-            Console.WriteLine("code: {0} \n time:{1}\n state:{2} measure: ", device.DeviceCode, device.TimeStamp, device.DeviceState);
-            foreach (var v in device.measurements)
-            {
-                Console.WriteLine("{0} : {1}", v.Key, v.Value);
-            }
-
-            
             CreateChannelDevice createChannelDevice = new CreateChannelDevice(device.myAgregator);
 
             Task t1 = new Task(() =>
@@ -54,31 +47,31 @@ namespace AMIDevice
 
             t1.Start();
 
+        
             while (true)
             {
-                
-                
-
+            
                 if (device.DeviceState == Enums.State.on)
                 {
+                    Thread.Sleep(30000);
                     try
                     {
                         CreateChannelDevice.proxy = CreateChannelDevice.factory.CreateChannel();
                         CreateChannelDevice.proxy.Send(device.DeviceCode, device.TimeStamp, device.measurements, device.myAgregator);
+                        Console.WriteLine("Message sent in {0}.",device.TimeStamp);
                     }catch(Exception e)
                     {
                         Console.WriteLine("Agregator is not available at the moment, please try later.");
 
                     }
-                    Update(device);
-                    Thread.Sleep(1000);
-                }
-            }
+                    
             
+                }
+                Update(device);
+            }
+         
             Console.ReadKey();
         }
-
-
-
+        
     }
 }

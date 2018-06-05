@@ -16,18 +16,15 @@ namespace AMIAgregator
     {
         public string agregatorCode { get; set; }
         public State state { get ; set; }
-
         public static string port;
 
         public Agregator() { }
         public Agregator(int e)
         {
-                state = State.on;
-                Console.WriteLine("----Creating new Agregator----");
-                Random r = new Random();
-                port = "50"+r.Next(0,9) + r.Next(0, 9);
-                agregatorCode = port;
-
+            Console.WriteLine("--------Creating new Agregator--------");
+            Random r = new Random();
+            agregatorCode = "50"+r.Next(0,9) + r.Next(0, 9);
+            state = State.on;
 
             bool exists = false;
 
@@ -41,8 +38,7 @@ namespace AMIAgregator
                         if (a.AgregatorCode == agregatorCode)
                         {
                             Console.WriteLine("Agregator with that code already exist-> changing code..");
-                            port = "50" + r.Next(0, 9) + r.Next(0, 9);
-                            agregatorCode = port;
+                            agregatorCode = "50" + r.Next(0, 9) + r.Next(0, 9);
                             Console.WriteLine("New code is : {0}", agregatorCode);
                             exists = true;
                             break;
@@ -51,12 +47,10 @@ namespace AMIAgregator
                     }
                 } while (exists);
 
-               
-
                 var AgregatorBase = new AgregatorBase
                 {
-                   
-                    AgregatorCode = agregatorCode
+                    AgregatorCode = agregatorCode,
+                    Time = DateTime.Now.ToString()
                 };
 
                 data.AgregatorBaseData.Add(AgregatorBase);
@@ -64,35 +58,33 @@ namespace AMIAgregator
 
             }
 
+            port = agregatorCode;
 
-              
+            Console.WriteLine("Agregator is created with code [{0}].",agregatorCode);
+            Console.WriteLine("--------------------------------------");
+
         }
 
-        public void Send(string code, DateTime timestamp, Dictionary<Enums.MeasureType, double> measurements,string codeAgr)
+        public void Send(string code, long timestamp, Dictionary<Enums.MeasureType, double> measurements,string codeAgr)
         {
-
             using (var data = new LocalBaseDBContex())
             {
-
                 LocalBase lb = new LocalBase()
                 {
                     AgregatorCode = codeAgr,
                     DeviceCode = code,
-                    TimeStamp = timestamp.ToString(),
+                    TimeStamp = (Datas.UnixTimeToDateTime(timestamp)).ToString(),
                     Voltage = measurements[MeasureType.voltage],
                     Eletricity = measurements[MeasureType.electricity],
                     ActivePower = measurements[MeasureType.activePower],
                     ReactivePower = measurements[MeasureType.reactivePower]
                 };
-
-
+                
                 data.LocalBaseData.Add(lb);
                 data.SaveChanges();
-
             }
 
-            
-
+            Console.WriteLine("Message from [{0}] added in LocalDataBase at {1}.", code, Datas.UnixTimeToDateTime(timestamp));
         }
 
         public void turnOff()
