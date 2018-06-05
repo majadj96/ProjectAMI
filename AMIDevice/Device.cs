@@ -53,7 +53,17 @@ namespace AMIDevice
             AgregatorBase entity;
             using (var aData = new AgregatorBaseDBContex())
             {
-                 entity = aData.AgregatorBaseData.Find(Int32.Parse(agregatorID));
+                do
+                {
+                    entity = aData.AgregatorBaseData.Find(Int32.Parse(agregatorID));
+
+                    if (entity == null)
+                    {
+                        Console.WriteLine("Incorect format. Try again. \n->");
+                        agregatorID = Console.ReadLine();
+                    }
+
+                } while (entity == null);
             }
 
             myAgregator = entity.AgregatorCode;

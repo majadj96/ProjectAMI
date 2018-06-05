@@ -11,7 +11,6 @@ namespace AMIAgregator
 {
     public class Program
     {
-        public static ModelDBContex db = new ModelDBContex();
         static void Main(string[] args)
         {
 
