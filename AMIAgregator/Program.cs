@@ -9,7 +9,7 @@ using static Common.Enums;
 
 namespace AMIAgregator
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {

@@ -33,7 +33,7 @@ namespace AMIAgregator
                 do
                 {
                     exists = false;
-                    foreach (var a in data.AgregatorBaseData)
+                    foreach (var a in   data.AgregatorBaseData)
                     {
                         if (a.AgregatorCode == agregatorCode)
                         {

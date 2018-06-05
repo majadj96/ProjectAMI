@@ -1,0 +1,21 @@
+﻿<Window x:Class="SystemManagmentService.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SystemManagmentService"
+        mc:Ignorable="d"
+        Title="System Managment Service" Height="674.5" Width="1418.25">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Pictures/background1.jpg"/>
+        </Grid.Background>
+
+        <Button Margin="10,191,1341,397" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click1"></Button>
+        <Button Margin="10,278,1341,319" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click2"/>
+        <Button Margin="0,347,1341,243" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click3"/>
+        <Button Margin="0,432,1341,164" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click4"/>
+        <Button Margin="0,503,1341,91" Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Click5"/>
+
+    </Grid>
+</Window>
