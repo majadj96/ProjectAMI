@@ -24,6 +24,7 @@ namespace AMISystemManagement
 
         public void Close()
         {
+            Console.WriteLine("Service host is closed.");
             serviceHost.Close();
         }
 

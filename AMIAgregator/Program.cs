@@ -39,11 +39,28 @@ namespace AMIAgregator
                 }
             });
 
-            t1.Start();
+            Task t2 = new Task(() =>
+            {
+                while (true)
+                {
+                    Thread.Sleep(2000);
+                    using (var data = new AgregatorBaseDBContex())
+                    {
+                        AgregatorBase agr = data.AgregatorBaseData.Where(d => d.AgregatorCode == agregator.agregatorCode).First();
+                        agr.Time = DateTime.Now.ToString();
+                        data.SaveChanges();
+                      
 
+                    }
+                }
+            });
+
+            t1.Start();
+            t2.Start();
          
             while (true)
             {
+
                 if (agregator.state == Enums.State.on)
                 {
                     string path = @"..\configurabileTime.txt";

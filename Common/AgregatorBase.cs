@@ -15,5 +15,7 @@ namespace Common
         public int Id { get; set; }
 
         public string AgregatorCode { get; set; }
+
+        public string Time { get; set; }
     }
 }

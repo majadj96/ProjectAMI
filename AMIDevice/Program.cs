@@ -20,7 +20,7 @@ namespace AMIDevice
             d.measurements[Enums.MeasureType.voltage] = rand.Next(0, 244);
             d.measurements[Enums.MeasureType.activePower] = rand.Next(0, 102);
             d.measurements[Enums.MeasureType.reactivePower] = rand.Next(0, 103);
-            d.TimeStamp = DateTime.Now;
+            d.TimeStamp = Datas.ConvertToUnixTime(DateTime.Now);
         }
 
         static void Main(string[] args)

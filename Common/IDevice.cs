@@ -9,7 +9,7 @@ namespace Common
    public interface IDevice
     {
         string DeviceCode { get; set; }
-        DateTime TimeStamp { get; set; }
+        long TimeStamp { get; set; }
         Dictionary<Enums.MeasureType, double> measurements { get; set; }
         Enums.State DeviceState { get; set; }
         string myAgregator { get; set; }

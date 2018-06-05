@@ -15,7 +15,7 @@ namespace AMIDevice
     public class Device : IDevice
     {
         public string DeviceCode { get; set; }
-        public DateTime TimeStamp { get; set; }
+        public long TimeStamp { get; set; }
         public Dictionary<MeasureType, double> measurements { get ; set ; }
         public State DeviceState { get; set; }
         public string myAgregator { get; set; }
@@ -28,7 +28,7 @@ namespace AMIDevice
             Random rand = new Random();
             DeviceCode = rand.Next(200,10000).ToString();
 
-            TimeStamp = DateTime.Now;
+            TimeStamp = Datas.ConvertToUnixTime(DateTime.Now);
 
             measurements.Add(MeasureType.electricity, rand.Next(0,30));
             measurements.Add(MeasureType.voltage, rand.Next(0,240));
@@ -42,10 +42,15 @@ namespace AMIDevice
             using (var data = new AgregatorBaseDBContex())
             {
                 var AgregatorBase = from d in data.AgregatorBaseData select d;
-
+                
                 foreach(var lb in AgregatorBase)
                 {
-                    Console.WriteLine(lb.Id +". " + lb.AgregatorCode);
+                    DateTime timeA = DateTime.Parse(lb.Time);
+                    if(timeA >= DateTime.Now.AddSeconds(-2))
+                    {
+                        Console.WriteLine(lb.Id + ". " + lb.AgregatorCode);
+                    }
+                    
                 }
 
             }

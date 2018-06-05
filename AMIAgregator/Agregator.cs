@@ -46,10 +46,11 @@ namespace AMIAgregator
                         }
                     }
                 } while (exists);
-                
+
                 var AgregatorBase = new AgregatorBase
                 {
-                    AgregatorCode = agregatorCode
+                    AgregatorCode = agregatorCode,
+                    Time = DateTime.Now.ToString()
                 };
 
                 data.AgregatorBaseData.Add(AgregatorBase);
@@ -64,7 +65,7 @@ namespace AMIAgregator
 
         }
 
-        public void Send(string code, DateTime timestamp, Dictionary<Enums.MeasureType, double> measurements,string codeAgr)
+        public void Send(string code, long timestamp, Dictionary<Enums.MeasureType, double> measurements,string codeAgr)
         {
             using (var data = new LocalBaseDBContex())
             {
@@ -72,7 +73,7 @@ namespace AMIAgregator
                 {
                     AgregatorCode = codeAgr,
                     DeviceCode = code,
-                    TimeStamp = timestamp.ToString(),
+                    TimeStamp = (Datas.UnixTimeToDateTime(timestamp)).ToString(),
                     Voltage = measurements[MeasureType.voltage],
                     Eletricity = measurements[MeasureType.electricity],
                     ActivePower = measurements[MeasureType.activePower],
@@ -83,7 +84,7 @@ namespace AMIAgregator
                 data.SaveChanges();
             }
 
-            Console.WriteLine("Message from [{0}] added in LocalDataBase at {1}.", code, timestamp);
+            Console.WriteLine("Message from [{0}] added in LocalDataBase at {1}.", code, Datas.UnixTimeToDateTime(timestamp));
         }
 
         public void turnOff()
