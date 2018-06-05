@@ -12,6 +12,7 @@ namespace SystemManagmentService
         public static List<String> type = new List<String>() { "Voltage", "Eletricity", "Active power","Reactve power" };
 
         public static List<String> agregatorsCombo = new List<string>();
+        public static List<String> devicesCombo = new List<string>();
 
 
         public static List<string> loadAgregatorsFromDataBase()
@@ -32,6 +33,25 @@ namespace SystemManagmentService
                 }
             }
             return agregators;
+        }
+
+        public static List<string> loadDevicesFromDataBase()
+        {
+            List<string> devices = new List<string>();
+
+            using (var data = new GlobalBaseDBContex())
+            {
+                var Global = from d in data.GlobalBaseData select d;
+                foreach(var torka in Global)
+                {
+                    if (!devices.Contains(torka.DeviceCode))
+                    {
+                        devices.Add(torka.DeviceCode);
+                    }
+                }
+            }
+           
+            return devices;
         }
 
     }

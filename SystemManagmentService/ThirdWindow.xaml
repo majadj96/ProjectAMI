@@ -9,7 +9,27 @@
     <Window.Background>
         <ImageBrush ImageSource="Pictures/backgroundsmall.jpg"/>
     </Window.Background>
-    <Grid>
-        
+    
+        <Grid >
+        <ComboBox x:Name="MeasurementType" HorizontalAlignment="Left" Height="32" Margin="27,31,0,0" VerticalAlignment="Top" Width="146"/>
+        <Label Content="MeasurementType" FontSize="17" HorizontalAlignment="Left" Height="42" Margin="27,0,0,0" VerticalAlignment="Top" Width="160"/>
+        <ComboBox x:Name="DeviceCombo" HorizontalAlignment="Left" Height="32" Margin="239,31,0,0" VerticalAlignment="Top" Width="175"/>
+        <Label Content="Device" FontSize="17" HorizontalAlignment="Left" Height="39" Margin="270,3,0,0" VerticalAlignment="Top" Width="96"/>
+        <DatePicker x:Name="dataPicker" HorizontalAlignment="Left" Height="32" Margin="499,31,0,0" VerticalAlignment="Top" Width="123" RenderTransformOrigin="0.5,0.5">
+            <DatePicker.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.223"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </DatePicker.RenderTransform>
+        </DatePicker>
+        <Button Content="GO!" x:Name="draw" HorizontalAlignment="Left" Height="32" Margin="679,31,0,0" VerticalAlignment="Top" Width="63" Click="draw_Click"/>
+        <Label Content="Label" x:Name="L" HorizontalAlignment="Left" Height="48" Margin="851,24,0,0" VerticalAlignment="Top" Width="182"/>
+
+
+        <Canvas Name="canGraph" Background="White" Width="300" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </Grid>
+    
 </Window>

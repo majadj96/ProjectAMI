@@ -48,6 +48,7 @@ namespace SystemManagmentService
 
         private void Button_Click3(object sender, RoutedEventArgs e)
         {
+            Datas.devicesCombo = Datas.loadDevicesFromDataBase();
             ThirdWindow w = new ThirdWindow();
             w.ShowDialog();
         }
