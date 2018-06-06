@@ -35,7 +35,7 @@ namespace SystemManagmentService
 
             if (!validate())
             {
-                MessageBox.Show("Niste popunili sva pollja!", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("There are empty/invalid filds!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
