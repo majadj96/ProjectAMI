@@ -15,6 +15,6 @@ namespace Common
         string myAgregator { get; set; }
 
         bool turnOn();
-        void turnOff();
+        bool turnOff();
     }
 }

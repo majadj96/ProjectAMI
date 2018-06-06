@@ -1,6 +1,5 @@
 ﻿using AMIDevice;
 using Common;
-using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -13,26 +12,13 @@ namespace AMIDeviceTest
     [TestFixture]
     public class DeviceTest
     {
-        IDevice device1;
-        IDevice device2;
-
-        [SetUp]
-        public void Setup()
-        {
-            var moq = new Mock<IDevice>();
-            moq.Setup(d => d.DeviceState).Returns(Enums.State.on);
-            device1 = moq.Object;
-            var moq2 = new Mock<IDevice>();
-            moq2.Setup(d => d.DeviceState).Returns(Enums.State.off);
-            device2 = moq2.Object;
-        }
         
         [Test]
         public void turnOnGoodParameter()
         {
-            IDevice device22 = new Device(Enums.State.off);
+            IDevice device = new Device(Enums.State.off);
          
-            bool ret = device22.turnOn();
+            bool ret = device.turnOn();
 
             Assert.AreEqual(true, ret);
         
@@ -41,17 +27,38 @@ namespace AMIDeviceTest
         [Test]
         public void turnOnBadParameter()
         {
-            IDevice device22 = new Device(Enums.State.on);
+            IDevice device = new Device(Enums.State.on);
 
             Assert.Throws<ArgumentException>(() =>
             {
-                bool ret = device22.turnOn();
+                bool ret = device.turnOn();
             });
            
         }
 
-       
-      
+        [Test]
+        public void turnOffGoodParameter()
+        {
+            IDevice device = new Device(Enums.State.on);
+
+            bool ret = device.turnOff();
+
+            Assert.AreEqual(true, ret);
+
+        }
+
+        [Test]
+        public void turnOffBadParameter()
+        {
+            IDevice device = new Device(Enums.State.off);
+
+            Assert.Throws<ArgumentException>(() =>
+            {
+                bool ret = device.turnOff();
+            });
+
+        }
+
 
     }
 }
