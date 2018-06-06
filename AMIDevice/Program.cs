@@ -53,7 +53,7 @@ namespace AMIDevice
             
                 if (device.DeviceState == Enums.State.on)
                 {
-                    Thread.Sleep(30000);
+                    Thread.Sleep(1000);
                     try
                     {
                         CreateChannelDevice.proxy = CreateChannelDevice.factory.CreateChannel();
@@ -70,7 +70,7 @@ namespace AMIDevice
                 Update(device);
             }
          
-            Console.ReadKey();
+            
         }
         
     }

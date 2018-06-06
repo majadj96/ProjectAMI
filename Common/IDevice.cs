@@ -16,5 +16,8 @@ namespace Common
 
         bool turnOn();
         bool turnOff();
+        List<string> ReadAgregatorsFromBase();
+        string CheckChosenAgregator(List<string> listagr, string agregatorID);
+        string CheckLocalBase(string myAgregator, string DeviceCode);
     }
 }

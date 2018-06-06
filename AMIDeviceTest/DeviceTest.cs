@@ -44,7 +44,7 @@ namespace AMIDeviceTest
             bool ret = device.turnOff();
 
             Assert.AreEqual(true, ret);
-
+            
         }
 
         [Test]
@@ -58,6 +58,35 @@ namespace AMIDeviceTest
             });
 
         }
+
+       /* [Test]
+        public void ReadAgregatorsFromBaseGood()
+        {
+            IDevice device = new Device();
+            List<string> listagr = device.ReadAgregatorsFromBase();
+            Assert.IsEmpty(listagr);
+
+        }
+        [Test]
+        public void ReadAgregatorsFromBaseBad()
+        {
+            IDevice device = new Device();
+            List<string> listagr = device.ReadAgregatorsFromBase();
+            //Assert.IsNull(listagr);
+           
+            
+
+        }
+
+        [Test]
+        [TestCase()]
+        public void CheckChosenAgregatorGood()
+        {
+            IDevice device = new Device();
+           // string ret = device.CheckChosenAgregator(listagr, agregatorID);
+        }
+        */
+       
 
 
     }

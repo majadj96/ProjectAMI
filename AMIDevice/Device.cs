@@ -1,5 +1,6 @@
 ﻿using AMISystemManagement;
 using Common;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -105,10 +106,7 @@ namespace AMIDevice
                             exists = true;
                             break;
                         }
-                        else
-                        {
-                            throw new KeyNotFoundException();
-                        }
+                        
 
                     }
                 } while (exists);
@@ -125,6 +123,7 @@ namespace AMIDevice
             int i = 1;
             using (var data = new AgregatorBaseDBContex())
             {
+                
                 var AgregatorBase = from d in data.AgregatorBaseData select d;
 
                 foreach (var lb in AgregatorBase)
@@ -140,7 +139,7 @@ namespace AMIDevice
                 }
 
             }
-
+            
             return listAgr;
         }
 
