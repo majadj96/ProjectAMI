@@ -12,8 +12,8 @@
     <Window.Background>
         <ImageBrush ImageSource="Pictures/backgroundsmall.jpg"/>
     </Window.Background>
-    
-        <Grid >
+
+    <Grid >
         <DVC:Chart Name="mcChart" Margin="0,119,62,0" BorderBrush="Transparent" >
             <DVC:Chart.Series >
                 <DVC:ColumnSeries Title="Average"
@@ -23,9 +23,11 @@
             </DVC:Chart.Series>
 
         </DVC:Chart>
-        <ComboBox x:Name="DeviceCombo" HorizontalAlignment="Left" Height="32" Margin="10,49,0,0" VerticalAlignment="Top" Width="175"/>
-        <Label Content="Device" FontSize="17" HorizontalAlignment="Left" Height="39" Margin="44,10,0,0" VerticalAlignment="Top" Width="96"/>
-        <DatePicker x:Name="dataPicker" HorizontalAlignment="Left" Height="32" Margin="249,45,0,0" VerticalAlignment="Top" Width="123" RenderTransformOrigin="0.5,0.5">
+        <ComboBox x:Name="DeviceCombo"   DropDownOpened="DeviceCombo_DropDownOpened" HorizontalAlignment="Left" Height="32" Margin="26,82,0,0" VerticalAlignment="Top" Width="175" FontFamily="Microsoft JhengHei" FontSize="18"/>
+        <Label Content="Device" FontSize="18" HorizontalAlignment="Left" Height="39" Margin="26,43,0,0" VerticalAlignment="Top" Width="96" FontFamily="Microsoft JhengHei" FontWeight="Bold" Background="{x:Null}" Foreground="White"/>
+        <Label Content="Date" FontSize="18" HorizontalAlignment="Left" Height="39" Margin="274,43,0,0" VerticalAlignment="Top" Width="96" FontFamily="Microsoft JhengHei" FontWeight="Bold" Background="{x:Null}" Foreground="White"/>
+
+        <DatePicker x:Name="dataPicker" HorizontalAlignment="Left" Height="32" Margin="272,82,0,0" VerticalAlignment="Top" Width="170" RenderTransformOrigin="0.5,0.5" FontFamily="Microsoft JhengHei" FontSize="18">
             <DatePicker.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -35,7 +37,7 @@
                 </TransformGroup>
             </DatePicker.RenderTransform>
         </DatePicker>
-        <Button Content="GO!" x:Name="draw" HorizontalAlignment="Left" Height="32" Margin="679,31,0,0" VerticalAlignment="Top" Width="63" Click="draw_Click"/>
+        <Button Content="Draw graph!"  x:Name="draw" HorizontalAlignment="Left" Height="47" Margin="774,67,0,0" VerticalAlignment="Top" Width="164" Click="draw_Click" FontFamily="Microsoft JhengHei" FontSize="20" Background="#FF434BC1" Foreground="White" BorderBrush="White" FontWeight="Bold"/>
     </Grid>
-    
+
 </Window>

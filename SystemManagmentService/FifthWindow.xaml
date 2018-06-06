@@ -10,22 +10,22 @@
         <ImageBrush ImageSource="Pictures/backgroundsmall.jpg"/>
     </Window.Background>
     <Grid>
-        <ComboBox x:Name="MeasurementType" HorizontalAlignment="Left" Height="32" Margin="27,33,0,0" VerticalAlignment="Top" Width="146"/>
-        <ComboBox x:Name="DeviceCombo" HorizontalAlignment="Left" Height="32" Margin="113,133,0,0" VerticalAlignment="Top" Width="146"/>
-        <Label Content="Device" FontSize="17" HorizontalAlignment="Left" Height="42" Margin="113,91,0,0" VerticalAlignment="Top" Width="160"/>
-        <TextBox x:Name="Ispis" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" IsReadOnly="True" Height="422" Margin="10,207,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="1150" FontFamily="Segoe Print" FontSize="17" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+        <ComboBox x:Name="MeasurementType" HorizontalAlignment="Left" Height="32" Margin="27,82,0,0" VerticalAlignment="Top" Width="186" FontSize="18" FontFamily="Microsoft JhengHei"/>
+        <ComboBox x:Name="DeviceCombo"  DropDownOpened="DeviceCombo_DropDownOpened"  HorizontalAlignment="Left" Height="32" Margin="278,82,0,0" VerticalAlignment="Top" Width="146" FontFamily="Microsoft JhengHei" FontSize="18"/>
+        <Label Content="Device" FontSize="18" HorizontalAlignment="Left" Height="42" Margin="278,43,0,0" VerticalAlignment="Top" Width="160" FontFamily="Microsoft JhengHei" FontWeight="Bold" Background="{x:Null}" Foreground="White"/>
+        <TextBox x:Name="Ispis" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" IsReadOnly="True" Height="422" Margin="10,207,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="1150" FontFamily="Microsoft JhengHei" FontSize="20" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="White" />
 
-        <ComboBox x:Name="Operator" HorizontalAlignment="Left" Height="32" Margin="251,33,0,0" VerticalAlignment="Top" Width="146"/>
-        <Label Content="MeasurementType" FontSize="17" HorizontalAlignment="Left" Height="42" Margin="27,0,0,0" VerticalAlignment="Top" Width="160"/>
+        <ComboBox x:Name="Operator" HorizontalAlignment="Left" Height="32" Margin="625,82,0,0" VerticalAlignment="Top" Width="102" FontSize="18" FontFamily="Microsoft JhengHei"/>
+        <Label Content="MeasurementType" FontSize="18" HorizontalAlignment="Left" Height="42" Margin="27,43,0,0" VerticalAlignment="Top" Width="186" FontFamily="Microsoft JhengHei" FontWeight="Bold" Foreground="White"/>
 
-        <Label Content="Operator" FontSize="17" HorizontalAlignment="Left" Height="42" Margin="251,0,0,0" VerticalAlignment="Top" Width="160"/>
-        <TextBox x:Name="Value"  HorizontalAlignment="Left" Height="32" Margin="450,33,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="90"/>
-        <Label Content="Value" FontSize="17" HorizontalAlignment="Left" Height="42" Margin="450,4,0,0" VerticalAlignment="Top" Width="160"/>
-        <DatePicker x:Name="datePickerStart" HorizontalAlignment="Left" Height="68" Margin="638,65,0,0" VerticalAlignment="Top" Width="208"/>
-        <DatePicker x:Name="datePickerEnd" HorizontalAlignment="Left" Height="68" Margin="884,65,0,0" VerticalAlignment="Top" Width="174"/>
-        <Label Content="Start" FontSize="17" HorizontalAlignment="Left" Height="42" Margin="686,24,0,0" VerticalAlignment="Top" Width="160"/>
-        <Label Content="End" FontSize="17" HorizontalAlignment="Left" Height="42" Margin="918,24,0,0" VerticalAlignment="Top" Width="160"/>
-        <Button Content="GO!" HorizontalAlignment="Left" Height="51" Margin="1083,42,0,0" VerticalAlignment="Top" Width="55" Click="Button_Click"/>
+        <Label Content="Operator" FontSize="18" HorizontalAlignment="Left" Height="42" Margin="625,43,0,0" VerticalAlignment="Top" Width="102" FontFamily="Microsoft JhengHei" FontWeight="Bold" Foreground="White"/>
+        <TextBox x:Name="Value"  HorizontalAlignment="Left" Height="32" Margin="488,83,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="90" FontSize="18" FontFamily="Microsoft JhengHei"/>
+        <Label Content="Value" FontSize="18" HorizontalAlignment="Left" Height="42" Margin="488,43,0,0" VerticalAlignment="Top" Width="90" FontFamily="Microsoft JhengHei" FontWeight="Bold" Foreground="White"/>
+        <DatePicker x:Name="datePickerStart" HorizontalAlignment="Left" Height="34" Margin="786,82,0,0" VerticalAlignment="Top" Width="172" FontSize="18" FontFamily="Microsoft JhengHei"/>
+        <DatePicker x:Name="datePickerEnd" HorizontalAlignment="Left" Height="34" Margin="985,82,0,0" VerticalAlignment="Top" Width="172" FontSize="18" FontFamily="Microsoft JhengHei"/>
+        <Label Content="Start date" FontSize="18" HorizontalAlignment="Left" Height="42" Margin="786,43,0,0" VerticalAlignment="Top" Width="160" FontFamily="Microsoft JhengHei" FontWeight="Bold" Foreground="White"/>
+        <Label Content="End" FontSize="18" HorizontalAlignment="Left" Height="42" Margin="985,43,0,0" VerticalAlignment="Top" Width="160" FontFamily="Microsoft JhengHei" FontWeight="Bold" Foreground="White"/>
+        <Button Content="List alarm states" HorizontalAlignment="Left" Height="51" Margin="869,121,0,0" VerticalAlignment="Top" Width="203" Click="Button_Click" FontSize="20" FontFamily="Microsoft JhengHei" Background="#FF434BC1" Foreground="White" BorderBrush="White"/>
 
 
     </Grid>

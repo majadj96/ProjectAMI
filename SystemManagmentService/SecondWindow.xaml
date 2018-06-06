@@ -15,19 +15,21 @@
     <Grid>
         <DVC:Chart Name="mcChart" Margin="0,119,62,0" BorderBrush="Transparent" >
             <DVC:Chart.Series >
-                <DVC:ColumnSeries Title="Sum"
+                <DVC:LineSeries Title="Sum"
                     IndependentValueBinding="{Binding Path=Key}"
                     DependentValueBinding="{Binding Path=Value}">
-                    </DVC:ColumnSeries>
+                    </DVC:LineSeries>
             </DVC:Chart.Series>
 
         </DVC:Chart>
 
-        <ComboBox x:Name="MeasurementType" HorizontalAlignment="Left" Height="32" Margin="27,33,0,0" VerticalAlignment="Top" Width="146"/>
-        <Label Content="MeasurementType" FontSize="17" HorizontalAlignment="Left" Height="42" Margin="27,0,0,0" VerticalAlignment="Top" Width="160"/>
-        <ComboBox x:Name="AgregatorCombo" HorizontalAlignment="Left" Height="32" Margin="239,31,0,0" VerticalAlignment="Top" Width="175"/>
-        <Label Content="Agregator" FontSize="17" HorizontalAlignment="Left" Height="39" Margin="270,3,0,0" VerticalAlignment="Top" Width="96"/>
-        <DatePicker x:Name="dataPicker" HorizontalAlignment="Left" Height="32" Margin="499,31,0,0" VerticalAlignment="Top" Width="123" RenderTransformOrigin="0.5,0.5">
+        <ComboBox x:Name="MeasurementType" HorizontalAlignment="Left" Height="32" Margin="27,82,0,0" VerticalAlignment="Top" Width="186" FontSize="18" FontFamily="Microsoft JhengHei"/>
+        <Label Content="MeasurementType" FontSize="18" HorizontalAlignment="Left" Height="42" Margin="27,40,0,0" VerticalAlignment="Top" Width="186" FontFamily="Microsoft JhengHei" FontWeight="Bold" Foreground="White"/>
+        <ComboBox x:Name="AgregatorCombo" DropDownOpened="AgregatorCombo_DropDownOpened" HorizontalAlignment="Left" Height="32" Margin="270,82,0,0" VerticalAlignment="Top" Width="175" FontFamily="Microsoft JhengHei" FontSize="18"/>
+        <Label Content="Agregator" FontSize="18" HorizontalAlignment="Left" Height="39" Margin="270,43,0,0" VerticalAlignment="Top" Width="125" FontFamily="Microsoft JhengHei" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Date" FontSize="18" HorizontalAlignment="Left" Height="39" Margin="507,43,0,0" VerticalAlignment="Top" Width="125" FontFamily="Microsoft JhengHei" FontWeight="Bold" Foreground="White"/>
+
+        <DatePicker x:Name="dataPicker" HorizontalAlignment="Left" Height="33" Margin="505,82,0,0" VerticalAlignment="Top" Width="166" RenderTransformOrigin="0.437,0.484"  FontSize="18" FontFamily="Microsoft JhengHei">
             <DatePicker.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -37,7 +39,7 @@
                 </TransformGroup>
             </DatePicker.RenderTransform>
         </DatePicker>
-        <Button Content="GO!" x:Name="draw" HorizontalAlignment="Left" Height="32" Margin="679,31,0,0" VerticalAlignment="Top" Width="63" Click="draw_Click"/>
+        <Button Content="Draw graph!"  x:Name="draw" HorizontalAlignment="Left" Height="47" Margin="774,67,0,0" VerticalAlignment="Top" Width="164" Click="draw_Click" FontFamily="Microsoft JhengHei" FontSize="20" Background="#FF434BC1" Foreground="White" BorderBrush="White" FontWeight="Bold"/>
 
 
 

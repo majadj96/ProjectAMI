@@ -23,21 +23,23 @@
 
         </DVC:Chart>
 
-        <ComboBox x:Name="MeasurementType" HorizontalAlignment="Left" Height="32" Margin="27,33,0,0" VerticalAlignment="Top" Width="146"/>
-        <Label Content="MeasurementType" FontSize="17" HorizontalAlignment="Left" Height="42" Margin="27,0,0,0" VerticalAlignment="Top" Width="160"/>
-        <ComboBox x:Name="DeviceCombo" HorizontalAlignment="Left" Height="32" Margin="239,31,0,0" VerticalAlignment="Top" Width="175"/>
-        <Label Content="Device" FontSize="17" HorizontalAlignment="Left" Height="39" Margin="270,3,0,0" VerticalAlignment="Top" Width="96"/>
-        <DatePicker x:Name="dataPicker" HorizontalAlignment="Left" Height="32" Margin="499,31,0,0" VerticalAlignment="Top" Width="123" RenderTransformOrigin="0.5,0.5">
+        <ComboBox x:Name="MeasurementType" HorizontalAlignment="Left" Height="32" Margin="25,73,0,0" VerticalAlignment="Top" Width="190" FontFamily="Microsoft JhengHei" FontSize="18"/>
+        <Label Content="MeasurementType" FontSize="18" HorizontalAlignment="Left" Height="42" Margin="25,31,0,0" VerticalAlignment="Top" Width="173" FontFamily="Microsoft JhengHei" FontWeight="Bold" Foreground="White"/>
+        <ComboBox x:Name="DeviceCombo" HorizontalAlignment="Left" Height="32" Margin="264,73,0,0" VerticalAlignment="Top" Width="176" DropDownOpened="DeviceCombo_DropDownOpened" FontFamily="Microsoft JhengHei" FontSize="18"/>
+        <Label Content="Device" FontSize="18" HorizontalAlignment="Left" Height="39" Margin="264,31,0,0" VerticalAlignment="Top" Width="176" FontFamily="Microsoft JhengHei" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Date" FontSize="18" HorizontalAlignment="Left" Height="39" Margin="494,31,0,0" VerticalAlignment="Top" Width="176" FontFamily="Microsoft JhengHei" FontWeight="Bold" Foreground="White"/>
+
+        <DatePicker x:Name="dataPicker" HorizontalAlignment="Left" Height="33" Margin="492,72,0,0" VerticalAlignment="Top" Width="166" RenderTransformOrigin="0.437,0.484" FontFamily="Microsoft JhengHei" FontSize="18">
             <DatePicker.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
                     <RotateTransform Angle="-0.223"/>
-                    <TranslateTransform/>
+                    <TranslateTransform X="-0.002" Y="0.043"/>
                 </TransformGroup>
             </DatePicker.RenderTransform>
         </DatePicker>
-        <Button Content="GO!" x:Name="draw" HorizontalAlignment="Left" Height="32" Margin="679,31,0,0" VerticalAlignment="Top" Width="63" Click="draw_Click"/>
+        <Button Content="Draw graph!"  x:Name="draw" HorizontalAlignment="Left" Height="47" Margin="774,67,0,0" VerticalAlignment="Top" Width="164" Click="draw_Click" FontFamily="Microsoft JhengHei" FontSize="20" Background="#FF434BC1" Foreground="White" BorderBrush="White" FontWeight="Bold"/>
 
 
 
