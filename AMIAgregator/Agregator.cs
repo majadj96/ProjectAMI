@@ -12,13 +12,15 @@ using static Common.Enums;
 
 namespace AMIAgregator
 {
-    class Agregator : IAMIAgregator
+    public class Agregator : IAMIAgregator
     {
         public string agregatorCode { get; set; }
         public State state { get ; set; }
         public static string port;
 
         public Agregator() { }
+        public Agregator(State state) { this.state = state; }
+
         public Agregator(int e)
         {
             Console.WriteLine("--------Creating new Agregator--------");
@@ -93,19 +95,30 @@ namespace AMIAgregator
             Console.WriteLine("Message from [{0}] added in LocalDataBase at {1}.", code, Datas.UnixTimeToDateTime(timestamp));
         }
 
-        public void turnOff(State state)
+        public bool turnOff()
         {
             if(state == State.on)
             {
                 state = State.off;
+                return true;
+            }
+            else
+            {
+                throw new ArgumentException("State is up to date.");
+
             }
         }
 
-        public void turnOn(State state)
+        public bool turnOn()
         {
             if (state == State.off)
             {
                 state = State.on;
+                return true;
+            }
+            else
+            {
+                throw new ArgumentException("State is up to date.");
             }
         }
     }

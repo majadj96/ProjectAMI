@@ -14,8 +14,8 @@ namespace Common
 
         string agregatorCode { get; set; }
         State state { get; set; }
-        void turnOn(Enums.State state);
-        void turnOff(Enums.State state);
+        bool turnOn();
+        bool turnOff();
         [OperationContract]
         void Send(string code, long timestamp, Dictionary<MeasureType, double> measurements,string codeAgr); // ***DODAT AGREGATOR CODE***
         
