@@ -27,6 +27,7 @@ namespace AMIDevice
         {
             IDevice device = new Device();
             CreateChannelDevice createChannelDevice = new CreateChannelDevice(device.myAgregator);
+            bool on = true;
 
             Task t1 = new Task(() =>
             {
@@ -34,13 +35,21 @@ namespace AMIDevice
                 {
                     if (Console.ReadKey(true).Key == ConsoleKey.Escape)
                     {
-                        device.turnOff();
-                        Console.WriteLine("Device is turned off at {0}", DateTime.Now);
+                        if (on)
+                        {
+                            on = false;
+                            device.turnOff();
+                            Console.WriteLine("Device is turned off at {0}", DateTime.Now);
+                        }
                     }
                     if (Console.ReadKey(true).Key == ConsoleKey.Enter)
                     {
-                        device.turnOn();
-                        Console.WriteLine("Device is turned on at {0}", DateTime.Now);
+                        if (!on)
+                        {
+                            on = true;
+                            device.turnOn();
+                            Console.WriteLine("Device is turned on at {0}", DateTime.Now);
+                        }
                     }
                 }
             });

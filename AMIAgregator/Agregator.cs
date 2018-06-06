@@ -121,11 +121,9 @@ namespace AMIAgregator
 
             if(timestamp < 1528236934 || timestamp> 1546300800)
             {
-                try { }
-                catch (Exception e)
-                {
+               
                     throw new ArgumentOutOfRangeException("Timestamp is out of range.");
-                }
+                
             }
 
             using (var data = new LocalBaseDBContex())
@@ -157,12 +155,9 @@ namespace AMIAgregator
             }
             else
             {
-                try { }
-                catch (Exception e)
-                {
+               
                     throw new ArgumentException("State is up to date.");
-                }
-                return false;
+                
             }
         }
 
@@ -175,12 +170,9 @@ namespace AMIAgregator
             }
             else
             {
-                try { }
-                catch (Exception e)
-                {
+                
                     throw new ArgumentException("State is up to date.");
-                }
-                return false;
+                
             }
         }
     }
