@@ -42,12 +42,19 @@ namespace AMIDevice
             measurements.Add(MeasureType.reactivePower, rand.Next(0,100));
 
             DeviceState = State.on;
+            int a = 0;
+            List<string> listagr;
+            string agregatorID;
+            do
+            {
+                Console.WriteLine("Choose Agreagator:");
+                listagr = ReadAgregatorsFromBase(); //metoda citanja iz baze
 
-            Console.WriteLine("Choose Agreagator:");
-            List<string> listagr = ReadAgregatorsFromBase(); //metoda citanja iz baze
+                agregatorID = Console.ReadLine();
+                a = int.Parse(agregatorID);
+            } while (a < 48 || a > 57);
 
-            string agregatorID = Console.ReadLine();
-            
+
             myAgregator = CheckChosenAgregator(listagr, agregatorID); // metoda provera sa bazom 
 
             DeviceCode = CheckLocalBase(myAgregator, DeviceCode);// provera da li postoji taj device na tom agregatoru

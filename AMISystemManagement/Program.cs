@@ -21,16 +21,22 @@ namespace AMISystemManagement
                 {
                     if (Console.ReadKey(true).Key == ConsoleKey.Escape)
                     {
-                        systemManagement.turnOff();
-                        Console.WriteLine("System Management is turned off at {0}", DateTime.Now);
-                        service.Close();
+                        if (systemManagement.state == Enums.State.on)
+                        {
+                            systemManagement.turnOff();
+                            Console.WriteLine("System Management is turned off at {0}", DateTime.Now);
+                            service.Close();
+                        }
                     }
                     if (Console.ReadKey(true).Key == ConsoleKey.Enter)
                     {
-                        systemManagement.turnOn();
-                        Console.WriteLine("System Management is turned on at {0}", DateTime.Now);
-                        service = new ServicePart();
-                        service.Open();
+                        if (systemManagement.state == Enums.State.off)
+                        {
+                            systemManagement.turnOn();
+                            Console.WriteLine("System Management is turned on at {0}", DateTime.Now);
+                            service = new ServicePart();
+                            service.Open();
+                        }
                     }
                 }
             });

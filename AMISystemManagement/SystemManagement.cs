@@ -21,6 +21,33 @@ namespace AMISystemManagement
 
         public void Send(string agregatorCode, Dictionary<DateTime, Dictionary<string, Dictionary<DateTime, Dictionary<Enums.MeasureType, double>>>> agregatorData)
         {
+            if (agregatorCode.Length != 4)
+            {
+                throw new ArgumentException("Invalid code");
+            }
+
+            
+            try
+            {
+                int.Parse(agregatorCode);
+                
+            }
+            catch
+            {
+                throw new ArgumentOutOfRangeException("It must be number.");
+            }
+
+
+
+            if (agregatorData.Count <= 0)
+            {
+                try { }
+                catch (Exception e)
+                {
+                    throw new ArgumentException("Dictionary is empty.");
+                }
+            }
+            
             using (var data = new GlobalBaseDBContex())
             {
                 foreach(KeyValuePair<DateTime,Dictionary<string, Dictionary<DateTime, Dictionary<Enums.MeasureType, double>>>> prvi in agregatorData)
