@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\..\..\REES\Razvoj EES\Razvoj EES\eBanking_v2\eBankingv2\eBanking\eBanking\BankaTest\bin\Debug\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\..\REES\Razvoj EES\Razvoj EES\NUnit-2.6.4\bin\framework\nunit.framework.dll</HintPath>
     </Reference>
@@ -45,6 +48,19 @@
   <ItemGroup>
     <Compile Include="AgregatorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AMIAgregator\AMIAgregator.csproj">
+      <Project>{788c3c00-6ca4-49a1-b7fb-c4e98437577f}</Project>
+      <Name>AMIAgregator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{0580FA65-E173-4134-8369-7E5AE9AF9342}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

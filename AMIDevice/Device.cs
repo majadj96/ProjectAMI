@@ -87,6 +87,22 @@ namespace AMIDevice
             }
         }
 
+
+        public void turnOn1(Enums.State s)
+        {
+            if (s==State.off)
+            {
+                this.DeviceState = State.on;
+            }
+            else
+            {
+                throw new ArgumentException("State is up to date");
+
+            }
+
+        }
+
+
         public string CheckLocalBase(string myAgregator, string DeviceCode)
         {
             using (var lData = new LocalBaseDBContex())
