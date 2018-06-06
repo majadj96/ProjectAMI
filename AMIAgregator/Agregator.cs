@@ -26,23 +26,33 @@ namespace AMIAgregator
             agregatorCode = "50"+r.Next(0,9) + r.Next(0, 9);
             state = State.on;
 
-            bool exists = false;
+            agregatorCode = addAgregator(agregatorCode);
+            port = agregatorCode;
 
-            using(var data = new AgregatorBaseDBContex())
+            Console.WriteLine("Agregator is created with code [{0}].",agregatorCode);
+            Console.WriteLine("--------------------------------------");
+
+        }
+
+        public string addAgregator(string agregatorCode)
+        {
+            using (var data = new AgregatorBaseDBContex())
             {
+                bool exists = false;
                 do
                 {
                     exists = false;
-                    foreach (var a in   data.AgregatorBaseData)
+                    foreach (var a in data.AgregatorBaseData)
                     {
                         if (a.AgregatorCode == agregatorCode)
                         {
+                            Random r = new Random();
                             Console.WriteLine("Agregator with that code already exist-> changing code..");
                             agregatorCode = "50" + r.Next(0, 9) + r.Next(0, 9);
                             Console.WriteLine("New code is : {0}", agregatorCode);
                             exists = true;
                             break;
-                           
+
                         }
                     }
                 } while (exists);
@@ -58,11 +68,7 @@ namespace AMIAgregator
 
             }
 
-            port = agregatorCode;
-
-            Console.WriteLine("Agregator is created with code [{0}].",agregatorCode);
-            Console.WriteLine("--------------------------------------");
-
+            return agregatorCode;
         }
 
         public void Send(string code, long timestamp, Dictionary<Enums.MeasureType, double> measurements,string codeAgr)
@@ -87,7 +93,7 @@ namespace AMIAgregator
             Console.WriteLine("Message from [{0}] added in LocalDataBase at {1}.", code, Datas.UnixTimeToDateTime(timestamp));
         }
 
-        public void turnOff()
+        public void turnOff(State state)
         {
             if(state == State.on)
             {
@@ -95,7 +101,7 @@ namespace AMIAgregator
             }
         }
 
-        public void turnOn()
+        public void turnOn(State state)
         {
             if (state == State.off)
             {

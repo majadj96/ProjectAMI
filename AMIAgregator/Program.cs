@@ -25,13 +25,13 @@ namespace AMIAgregator
                 {
                     if (Console.ReadKey(true).Key == ConsoleKey.Escape)
                     {
-                        agregator.turnOff();
+                        agregator.turnOff(Enums.State.on);
                         Console.WriteLine("Agregator is turned off at {0}", DateTime.Now);
                         service.Close();
                     }
                     if (Console.ReadKey(true).Key == ConsoleKey.Enter)
                     {
-                        agregator.turnOn();
+                        agregator.turnOn(Enums.State.off);
                         Console.WriteLine("Agregator is turned on at {0}", DateTime.Now);
                         service = new ServicePart();
                         service.Open();
@@ -63,6 +63,7 @@ namespace AMIAgregator
 
                 if (agregator.state == Enums.State.on)
                 {
+
                     string path = @"..\configurabileTime.txt";
                     string text = System.IO.File.ReadAllText(path);
                     int time = Int32.Parse(text);
@@ -70,58 +71,18 @@ namespace AMIAgregator
 
                     Dictionary<DateTime, Dictionary<string, Dictionary<DateTime, Dictionary<Enums.MeasureType, double>>>> agregatorDataLocal = new Dictionary<DateTime, Dictionary<string, Dictionary<DateTime, Dictionary<MeasureType, double>>>>();
 
-                    Dictionary<string, Dictionary<DateTime, Dictionary<Enums.MeasureType, double>>> deviceMeasurements = new Dictionary<string, Dictionary<DateTime, Dictionary<MeasureType, double>>>();
-                    Dictionary<DateTime, Dictionary<Enums.MeasureType, double>> list = new Dictionary<DateTime, Dictionary<MeasureType, double>>();
-
-                
+                    
                     try
                     {
-                        using (var data = new LocalBaseDBContex())
-                        {
-                            var AgregatorBase = from d in data.LocalBaseData select d;
 
-                            foreach (var lb in AgregatorBase)
-                            {
-                                if (lb.AgregatorCode == agregator.agregatorCode)
-                                {
-                                    Dictionary<MeasureType, double> measurement = new Dictionary<MeasureType, double>();
-                                    measurement.Add(MeasureType.voltage, lb.Voltage);
-                                    measurement.Add(MeasureType.electricity, lb.Eletricity);
-                                    measurement.Add(MeasureType.reactivePower, lb.ReactivePower);
-                                    measurement.Add(MeasureType.activePower, lb.ActivePower);
-                                    list.Add(DateTime.Parse(lb.TimeStamp),measurement);
-                                    deviceMeasurements[lb.DeviceCode]=list;
-                                }
-                            }
-
-                        }
-
-                        agregatorDataLocal[DateTime.Now] = deviceMeasurements;
+                        agregatorDataLocal = ReadFromLocal(agregator); //citanje lokalne baze 
 
                         CreateChannelAgregator.proxy = CreateChannelAgregator.factory.CreateChannel();
-                        CreateChannelAgregator.proxy.Send(agregator.agregatorCode,agregatorDataLocal);
+                        CreateChannelAgregator.proxy.Send(agregator.agregatorCode,agregatorDataLocal); //slanje globalnoj
                         Console.WriteLine("Measurements for Agregator [{0}] are sent.", agregator.agregatorCode);
 
-                        using (var data = new LocalBaseDBContex())
-                        {
-                        
-                        
-                            var AgregatorBase = from d in data.LocalBaseData select d;
-
-                        
-                            foreach (var lb in AgregatorBase)
-                            {
-                                if (lb.AgregatorCode == agregator.agregatorCode)
-                                {
-                                    data.LocalBaseData.Remove(lb);
-                                    
-                                }
-                            }
-                            Console.WriteLine("Measurements for Agregator [{0}] are deleted from LocalDataBase.", agregator.agregatorCode);
-                            data.SaveChanges();
-                        }
-                        
-
+                        DeleteFromLocal(agregator); // brisanje iz lokalne
+                       
                     }
                     catch (Exception e)
                     {
@@ -137,5 +98,61 @@ namespace AMIAgregator
             Console.ReadLine();
 
         }
+
+        public static void DeleteFromLocal(IAMIAgregator agregator)
+        {
+            using (var data = new LocalBaseDBContex())
+            {
+
+
+                var AgregatorBase = from d in data.LocalBaseData select d;
+
+
+                foreach (var lb in AgregatorBase)
+                {
+                    if (lb.AgregatorCode == agregator.agregatorCode)
+                    {
+                        data.LocalBaseData.Remove(lb);
+
+                    }
+                }
+                Console.WriteLine("Measurements for Agregator [{0}] are deleted from LocalDataBase.", agregator.agregatorCode);
+                data.SaveChanges();
+            }
+        }
+
+
+        public static Dictionary<DateTime, Dictionary<string, Dictionary<DateTime, Dictionary<Enums.MeasureType, double>>>> ReadFromLocal(IAMIAgregator agregator)
+        {
+            Dictionary<DateTime, Dictionary<string, Dictionary<DateTime, Dictionary<Enums.MeasureType, double>>>> agregatorDataLocal = new Dictionary<DateTime, Dictionary<string, Dictionary<DateTime, Dictionary<MeasureType, double>>>>();
+
+            Dictionary<string, Dictionary<DateTime, Dictionary<Enums.MeasureType, double>>> deviceMeasurements = new Dictionary<string, Dictionary<DateTime, Dictionary<MeasureType, double>>>();
+            Dictionary<DateTime, Dictionary<Enums.MeasureType, double>> list = new Dictionary<DateTime, Dictionary<MeasureType, double>>();
+
+            using (var data = new LocalBaseDBContex())
+            {
+                var AgregatorBase = from d in data.LocalBaseData select d;
+
+                foreach (var lb in AgregatorBase)
+                {
+                    if (lb.AgregatorCode == agregator.agregatorCode)
+                    {
+                        Dictionary<MeasureType, double> measurement = new Dictionary<MeasureType, double>();
+                        measurement.Add(MeasureType.voltage, lb.Voltage);
+                        measurement.Add(MeasureType.electricity, lb.Eletricity);
+                        measurement.Add(MeasureType.reactivePower, lb.ReactivePower);
+                        measurement.Add(MeasureType.activePower, lb.ActivePower);
+                        list.Add(DateTime.Parse(lb.TimeStamp), measurement);
+                        deviceMeasurements[lb.DeviceCode] = list;
+                    }
+                }
+
+            }
+
+            agregatorDataLocal[DateTime.Now] = deviceMeasurements;
+            return agregatorDataLocal;
+        }
+
+
     }
 }
