@@ -14,7 +14,7 @@ namespace Common
         Enums.State DeviceState { get; set; }
         string myAgregator { get; set; }
 
-        void turnOn();
-        void turnOff();
+        void turnOn(Enums.State DeviceState);
+        void turnOff(Enums.State DeviceState);
     }
 }
