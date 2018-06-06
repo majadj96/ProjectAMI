@@ -677,7 +677,7 @@ namespace SystemManagmentService
 
 
 
-                ((ColumnSeries)mcChart.Series[0]).ItemsSource = lista1;
+                ((LineSeries)mcChart.Series[0]).ItemsSource = lista1;
 
             }
             }
