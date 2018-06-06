@@ -40,7 +40,7 @@
       <HintPath>..\..\..\REES\Razvoj EES\Razvoj EES\eBanking_v2\eBankingv2\eBanking\eBanking\BankaTest\bin\Debug\Moq.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>..\..\..\REES\Razvoj EES\Razvoj EES\NUnit-2.6.4\bin\framework\nunit.framework.dll</HintPath>
+      <HintPath>..\..\..\..\Downloads\Razvoj EES\NUnit-2.6.4\bin\framework\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />

@@ -14,23 +14,31 @@ namespace AMISystemManagement
             ISystemManagement systemManagement = new SystemManagement();
             ServicePart service = new ServicePart();
             service.Open();
-
+            bool on = true;
             Task t1 = new Task(() =>
             {
                 while (true)
                 {
                     if (Console.ReadKey(true).Key == ConsoleKey.Escape)
                     {
-                        systemManagement.turnOff();
-                        Console.WriteLine("System Management is turned off at {0}", DateTime.Now);
-                        service.Close();
+                        if (on)
+                        {
+                            on = false;
+                            systemManagement.turnOff();
+                            Console.WriteLine("System Management is turned off at {0}", DateTime.Now);
+                            service.Close();
+                        }
                     }
                     if (Console.ReadKey(true).Key == ConsoleKey.Enter)
                     {
-                        systemManagement.turnOn();
-                        Console.WriteLine("System Management is turned on at {0}", DateTime.Now);
-                        service = new ServicePart();
-                        service.Open();
+                        if (!on)
+                        {
+                            on = false;
+                            systemManagement.turnOn();
+                            Console.WriteLine("System Management is turned on at {0}", DateTime.Now);
+                            service = new ServicePart();
+                            service.Open();
+                        }
                     }
                 }
             });
