@@ -25,13 +25,13 @@ namespace AMIAgregator
                 {
                     if (Console.ReadKey(true).Key == ConsoleKey.Escape)
                     {
-                        agregator.turnOff(Enums.State.on);
+                        agregator.turnOff(agregator.state);
                         Console.WriteLine("Agregator is turned off at {0}", DateTime.Now);
                         service.Close();
                     }
                     if (Console.ReadKey(true).Key == ConsoleKey.Enter)
                     {
-                        agregator.turnOn(Enums.State.off);
+                        agregator.turnOn(agregator.state);
                         Console.WriteLine("Agregator is turned on at {0}", DateTime.Now);
                         service = new ServicePart();
                         service.Open();
