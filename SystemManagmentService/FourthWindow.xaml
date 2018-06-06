@@ -15,10 +15,10 @@
     <Grid>
         <DVC:Chart Name="mcChart" Margin="0,119,62,0" BorderBrush="Transparent" >
             <DVC:Chart.Series >
-                <DVC:ColumnSeries Title="Average"
+                <DVC:LineSeries Title="Average"
                     IndependentValueBinding="{Binding Path=Key}"
                     DependentValueBinding="{Binding Path=Value}">
-                </DVC:ColumnSeries>
+                </DVC:LineSeries>
             </DVC:Chart.Series>
 
         </DVC:Chart>
@@ -37,7 +37,7 @@
                 </TransformGroup>
             </DatePicker.RenderTransform>
         </DatePicker>
-        <Button Content="Draw graph!"  x:Name="draw" HorizontalAlignment="Left" Height="47" Margin="774,67,0,0" VerticalAlignment="Top" Width="164" Click="draw_Click" FontFamily="Microsoft JhengHei" FontSize="20" Background="#FF434BC1" Foreground="White" BorderBrush="White" FontWeight="Bold"/>
+        <Button Content="Draw graph!"  x:Name="draw" HorizontalAlignment="Left" Height="47" Margin="804,67,0,0" VerticalAlignment="Top" Width="164" Click="draw_Click" FontFamily="Microsoft JhengHei" FontSize="20" Background="#FF434BC1" Foreground="White" BorderBrush="White" FontWeight="Bold"/>
         <Label Content="Date" FontSize="18" HorizontalAlignment="Left" Height="39" Margin="506,43,0,0" VerticalAlignment="Top" Width="125" FontFamily="Microsoft JhengHei" FontWeight="Bold" Foreground="White"/>
 
 
