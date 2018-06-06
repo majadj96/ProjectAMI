@@ -37,8 +37,30 @@ namespace AMISystemManagementTest
             }
 
 
+        [Test]
+        public void turnOffGoodParameter()
+        {
+            ISystemManagement system = new SystemManagement(Enums.State.on);
+
+            bool ret = system.turnOff();
+
+            Assert.AreEqual(true, ret);
+
+        }
+
+        [Test]
+        public void turnOffBadParameter()
+        {
+            ISystemManagement system = new SystemManagement(Enums.State.off);
+
+            Assert.Throws<ArgumentException>(() =>
+            {
+                bool ret = system.turnOff();
+            });
+
+        }
 
 
-        
+
     }
 }
