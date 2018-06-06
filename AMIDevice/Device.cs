@@ -58,11 +58,12 @@ namespace AMIDevice
 
         }
 
-        public void turnOff()
+        public bool turnOff()
         {
-            if (DeviceState == Enums.State.on)
+            if (this.DeviceState == Enums.State.on)
             {
-                DeviceState = Enums.State.off;
+                this.DeviceState = Enums.State.off;
+                return true;
             }
             else
             {

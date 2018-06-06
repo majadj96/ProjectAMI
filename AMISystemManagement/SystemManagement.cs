@@ -61,9 +61,9 @@ namespace AMISystemManagement
 
         public bool turnOff()
         {
-            if (state == Enums.State.on)
+            if (this.state == Enums.State.on)
             {
-                state = Enums.State.off;
+                this.state = Enums.State.off;
                 return true;
             }
             else
