@@ -11,7 +11,7 @@ namespace AMISystemManagement
     {
         static void Main(string[] args)
         {
-            ISystemManagement systemManagement = new SystemManagement(Enums.State.on);
+            ISystemManagement systemManagement = new SystemManagement();
             ServicePart service = new ServicePart();
             service.Open();
 
@@ -37,7 +37,12 @@ namespace AMISystemManagement
 
             t1.Start();
 
-            Console.ReadKey();
+            while (true)
+            {
+            }
+
+                Console.ReadLine();
+            
         }
     }
 }

@@ -23,6 +23,10 @@ namespace AMIAgregator
 
         public Agregator(int e)
         {
+            if (e < 0)
+            {
+                throw new OutOfMemoryException("Minus");
+            }
             Console.WriteLine("--------Creating new Agregator--------");
             Random r = new Random();
             agregatorCode = "50"+r.Next(0,9) + r.Next(0, 9);
@@ -38,6 +42,21 @@ namespace AMIAgregator
 
         public string addAgregator(string agregatorCode)
         {
+            if (agregatorCode.Length != 4 )
+            {
+                throw new ArgumentException("Invalid code");
+            }
+
+            try
+            {
+                int.Parse(agregatorCode);
+            }
+            catch
+            {
+                throw new ArgumentOutOfRangeException("It must be number.");
+            }
+
+
             using (var data = new AgregatorBaseDBContex())
             {
                 bool exists = false;
@@ -75,9 +94,38 @@ namespace AMIAgregator
 
         public void Send(string code, long timestamp, Dictionary<Enums.MeasureType, double> measurements,string codeAgr)
         {
-            if (measurements == null)
+            if(code.Length!=4 || codeAgr.Length != 4)
             {
-                throw new NullReferenceException("Dictionary is not set.");
+                throw new ArgumentException("Invalid code");
+            }
+
+            try{
+                int.Parse(code);
+                int.Parse(codeAgr);
+            }
+            catch
+            {
+                throw new ArgumentOutOfRangeException("It must be number.");
+            }
+           
+
+
+            if (measurements.Count <=0)
+            {
+                try { }
+                catch (Exception e)
+                {
+                    throw new ArgumentException("Dictionary is empty.");
+                }
+            }
+
+            if(timestamp < 1528236934 || timestamp> 1546300800)
+            {
+                try { }
+                catch (Exception e)
+                {
+                    throw new ArgumentOutOfRangeException("Timestamp is out of range.");
+                }
             }
 
             using (var data = new LocalBaseDBContex())
@@ -109,8 +157,12 @@ namespace AMIAgregator
             }
             else
             {
-                throw new ArgumentException("State is up to date.");
-
+                try { }
+                catch (Exception e)
+                {
+                    throw new ArgumentException("State is up to date.");
+                }
+                return false;
             }
         }
 
@@ -123,7 +175,12 @@ namespace AMIAgregator
             }
             else
             {
-                throw new ArgumentException("State is up to date.");
+                try { }
+                catch (Exception e)
+                {
+                    throw new ArgumentException("State is up to date.");
+                }
+                return false;
             }
         }
     }

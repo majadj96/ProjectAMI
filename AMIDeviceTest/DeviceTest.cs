@@ -11,23 +11,7 @@ namespace AMIDeviceTest
 {
     [TestFixture]
     public class DeviceTest
-    {
-
-
-
-        [Test]
-        [TestCase(1)]
-        [TestCase(Enums.State.off)]
-        public void turnOnGood2(Enums.State state)
-        {
-            IDevice device = new Device(Enums.State.off);
-            device.turnOn1(state);
-
-        }
-
-
-
-
+    {      
 
         [Test]
         public void turnOnGoodParameter()

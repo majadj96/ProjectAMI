@@ -32,7 +32,7 @@ namespace AMIDevice
             
             measurements = new Dictionary<MeasureType, double>();
             Random rand = new Random();
-            DeviceCode = rand.Next(200,10000).ToString();
+            DeviceCode = rand.Next(1000,9999).ToString();
 
             TimeStamp = Datas.ConvertToUnixTime(DateTime.Now);
 
@@ -67,8 +67,12 @@ namespace AMIDevice
             }
             else
             {
-                throw new ArgumentException("State is up to date");
-
+                try { }
+                catch (Exception e)
+                {
+                    throw new ArgumentException("State is up to date");
+                }
+                return false;
             }
         }
 
@@ -81,29 +85,37 @@ namespace AMIDevice
             }
             else
             {
-                throw new ArgumentException("State is up to date");
-
+                try { }
+                catch (Exception e)
+                {
+                    throw new ArgumentException("State is up to date");
+                }
+                return false;
             }
         }
 
 
-        public void turnOn1(Enums.State s)
-        {
-            if (s==State.off)
-            {
-                this.DeviceState = State.on;
-            }
-            else
-            {
-                throw new ArgumentException("State is up to date");
-
-            }
-
-        }
+     
 
 
         public string CheckLocalBase(string myAgregator, string DeviceCode)
         {
+            if (myAgregator.Length != 4 || DeviceCode.Length != 4)
+            {
+                throw new ArgumentException("Invalid code");
+            }
+
+            try
+            {
+                int.Parse(myAgregator);
+                int.Parse(DeviceCode);
+            }
+            catch
+            {
+                throw new ArgumentOutOfRangeException("It must be number.");
+            }
+
+
             using (var lData = new LocalBaseDBContex())
             {
                 bool exists = false;
@@ -121,11 +133,7 @@ namespace AMIDevice
                             exists = true;
                             break;
                         }
-                        else
-                        {
-                            throw new KeyNotFoundException();
-                        }
-
+                       
                     }
                 } while (exists);
 
@@ -164,6 +172,15 @@ namespace AMIDevice
 
         public string CheckChosenAgregator(List<string> listagr, string agregatorID)
         {
+            try
+            {
+                int.Parse(agregatorID);
+            }
+            catch
+            {
+                throw new ArgumentOutOfRangeException("It must be number.");
+            }
+
             AgregatorBase entity;
             
             using (var aData = new AgregatorBaseDBContex())

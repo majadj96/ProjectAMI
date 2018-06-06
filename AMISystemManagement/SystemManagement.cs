@@ -12,7 +12,7 @@ namespace AMISystemManagement
     {
         public State state { get; set; }
 
-        public SystemManagement() { }
+        public SystemManagement() { state = State.on; }
 
         public SystemManagement(State s)
         {
@@ -61,15 +61,22 @@ namespace AMISystemManagement
 
         public bool turnOff()
         {
-            if (this.state == Enums.State.on)
-            {
-                this.state = Enums.State.off;
-                return true;
-            }
+            
+                if (this.state == Enums.State.on)
+                {
+                    this.state = Enums.State.off;
+                    return true;
+                }
+            
             else
             {
-                throw new ArgumentException("State is up to date");
-
+               
+                try { }
+                catch (Exception e)
+                {
+                    throw new ArgumentException("State is up to date");
+                }
+                return false;
             }
         }
 
@@ -82,7 +89,12 @@ namespace AMISystemManagement
             }
             else
             {
-                throw new ArgumentException("State is up to date");
+                try { }
+                catch (Exception e)
+                {
+                    throw new ArgumentException("State is up to date");
+                }
+                return false;
 
             }
         }
