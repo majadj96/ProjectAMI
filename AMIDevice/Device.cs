@@ -60,6 +60,7 @@ namespace AMIDevice
             }
             else
             {
+                throw new ArgumentException("State is up to date");
 
             }
         }
@@ -72,7 +73,7 @@ namespace AMIDevice
             }
             else
             {
-
+                throw new ArgumentException("State is up to date");
             }
         }
 
@@ -94,6 +95,10 @@ namespace AMIDevice
                             Console.WriteLine("New code is : {0}", DeviceCode);
                             exists = true;
                             break;
+                        }
+                        else
+                        {
+                            throw new KeyNotFoundException();
                         }
 
                     }

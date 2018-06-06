@@ -9,6 +9,6 @@ namespace Common
     public class Enums
     {
         public enum MeasureType { voltage, electricity, activePower, reactivePower}
-        public enum State { on, off }
+        public enum State { on=0, off=1 }
     }
 }
