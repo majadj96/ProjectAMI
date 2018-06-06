@@ -38,48 +38,49 @@ namespace AMIDevice
             DeviceState = State.on;
 
             Console.WriteLine("Choose Agreagator:");
-            
-            using (var data = new AgregatorBaseDBContex())
-            {
-                var AgregatorBase = from d in data.AgregatorBaseData select d;
-                
-                foreach(var lb in AgregatorBase)
-                {
-                    DateTime timeA = DateTime.Parse(lb.Time);
-                    if(timeA >= DateTime.Now.AddSeconds(-2))
-                    {
-                        Console.WriteLine(lb.Id + ". " + lb.AgregatorCode);
-                    }
-                    
-                }
-
-            }
+            List<string> listagr = ReadAgregatorsFromBase(); //metoda citanja iz baze
 
             string agregatorID = Console.ReadLine();
-            AgregatorBase entity;
+            
+            myAgregator = CheckChosenAgregator(listagr, agregatorID); // metoda provera sa bazom 
 
-            using (var aData = new AgregatorBaseDBContex())
+            DeviceCode = CheckLocalBase(myAgregator, DeviceCode);// provera da li postoji taj device na tom agregatoru
+            
+            Console.WriteLine("Device is created with code [{0}] and agregator [{1}].", DeviceCode,myAgregator);
+            Console.WriteLine("------------------------------------------------------");
+            Console.WriteLine("Start measuring..");
+
+        }
+
+        public void turnOff(State DeviceState)
+        {
+            if (DeviceState == State.on)
             {
-                do
-                {
-                    entity = aData.AgregatorBaseData.Find(Int32.Parse(agregatorID));
-
-                    if (entity == null)
-                    {
-                        Console.WriteLine("Incorect format. Try again. \n->");
-                        agregatorID = Console.ReadLine();
-                    }
-
-                } while (entity == null);
+                DeviceState = State.off;
             }
+            else
+            {
 
-            myAgregator = entity.AgregatorCode;
+            }
+        }
 
+        public void turnOn(State DeviceState)
+        {
+            if (DeviceState == State.off)
+            {
+                DeviceState = State.on;
+            }
+            else
+            {
 
-            bool exists = false;
+            }
+        }
 
+        public string CheckLocalBase(string myAgregator, string DeviceCode)
+        {
             using (var lData = new LocalBaseDBContex())
             {
+                bool exists = false;
                 do
                 {
                     exists = false;
@@ -88,6 +89,7 @@ namespace AMIDevice
                         if (lb.AgregatorCode == myAgregator && lb.DeviceCode == DeviceCode)
                         {
                             Console.WriteLine("Device with that code already exist-> changing code..");
+                            Random rand = new Random();
                             DeviceCode = rand.Next(200, 10000).ToString();
                             Console.WriteLine("New code is : {0}", DeviceCode);
                             exists = true;
@@ -98,27 +100,61 @@ namespace AMIDevice
                 } while (exists);
 
             }
+
+            return DeviceCode;
+        }
+
+
+        public List<string> ReadAgregatorsFromBase()
+        {
+            List<string> listAgr = new List<string>();
+            int i = 1;
+            using (var data = new AgregatorBaseDBContex())
+            {
+                var AgregatorBase = from d in data.AgregatorBaseData select d;
+
+                foreach (var lb in AgregatorBase)
+                {
+                    DateTime timeA = DateTime.Parse(lb.Time);
+                    if (timeA >= DateTime.Now.AddSeconds(-10))
+                    {
+                        Console.WriteLine("{0}. {1}" ,i, lb.AgregatorCode);
+                        listAgr.Add((lb.Id).ToString());
+                        i++;
+                    }
+
+                }
+
+            }
+
+            return listAgr;
+        }
+
+
+
+        public string CheckChosenAgregator(List<string> listagr, string agregatorID)
+        {
+            AgregatorBase entity;
             
-            Console.WriteLine("Device is created with code [{0}] and agregator [{1}].", DeviceCode,myAgregator);
-            Console.WriteLine("------------------------------------------------------");
-            Console.WriteLine("Start measuring..");
-
-        }
-
-        public void turnOff()
-        {
-            if (DeviceState == State.on)
+            using (var aData = new AgregatorBaseDBContex())
             {
-                DeviceState = State.off;
+                do
+                {
+                    agregatorID = (Int32.Parse(agregatorID) - 1).ToString();
+                    string agrID = listagr[Int32.Parse(agregatorID)];
+                    entity = aData.AgregatorBaseData.Find(Int32.Parse(agrID));
+
+                    if (entity == null)
+                    {
+                        Console.WriteLine("Incorect format. Try again. \n->");
+                        agregatorID = Console.ReadLine();
+                    }
+
+                } while (entity == null);
             }
+
+            return entity.AgregatorCode;
         }
 
-        public void turnOn()
-        {
-            if (DeviceState == State.off)
-            {
-                DeviceState = State.on;
-            }
-        }
     }
 }
