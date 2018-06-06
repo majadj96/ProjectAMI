@@ -70,7 +70,7 @@ namespace AMIDevice
                 Update(device);
             }
          
-            Console.ReadKey();
+            
         }
         
     }

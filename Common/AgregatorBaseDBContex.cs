@@ -9,11 +9,9 @@ namespace Common
 {
     public class AgregatorBaseDBContex : DbContext
     {
-       public AgregatorBaseDBContex() : base("AgregatorBaseContex")
-         {
+       public AgregatorBaseDBContex() : base("AgregatorBaseContex"){}
 
-        }
-        public DbSet<AgregatorBase> AgregatorBaseData { get; set; }
+       public DbSet<AgregatorBase> AgregatorBaseData { get; set; }
 
         
     }
