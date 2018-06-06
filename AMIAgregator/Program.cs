@@ -17,6 +17,7 @@ namespace AMIAgregator
             IAMIAgregator agregator = new Agregator(1);
             CreateChannelAgregator createChannelAgregator = new CreateChannelAgregator();
             ServicePart service = new ServicePart();
+            bool on = true;
             service.Open();
             
             Task t1 = new Task(() =>
@@ -25,16 +26,24 @@ namespace AMIAgregator
                 {
                     if (Console.ReadKey(true).Key == ConsoleKey.Escape)
                     {
-                        agregator.turnOff();
-                        Console.WriteLine("Agregator is turned off at {0}", DateTime.Now);
-                        service.Close();
+                        if (on)
+                        {
+                            on = false;
+                            agregator.turnOff();
+                            Console.WriteLine("Agregator is turned off at {0}", DateTime.Now);
+                            service.Close();
+                        }
                     }
                     if (Console.ReadKey(true).Key == ConsoleKey.Enter)
                     {
-                        agregator.turnOn();
-                        Console.WriteLine("Agregator is turned on at {0}", DateTime.Now);
-                        service = new ServicePart();
-                        service.Open();
+                        if (!on)
+                        {
+                            on = true;
+                            agregator.turnOn();
+                            Console.WriteLine("Agregator is turned on at {0}", DateTime.Now);
+                            service = new ServicePart();
+                            service.Open();
+                        }
                     }
                 }
             });

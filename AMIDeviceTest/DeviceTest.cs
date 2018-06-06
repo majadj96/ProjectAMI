@@ -31,7 +31,7 @@ namespace AMIDeviceTest
 
             Assert.Throws<ArgumentException>(() =>
             {
-                bool ret = device.turnOn();
+                device.turnOn();
             });
            
         }
@@ -48,46 +48,50 @@ namespace AMIDeviceTest
         }
 
         [Test]
+
         public void turnOffBadParameter()
         {
             IDevice device = new Device(Enums.State.off);
 
             Assert.Throws<ArgumentException>(() =>
             {
-                bool ret = device.turnOff();
+                device.turnOff();
             });
 
         }
 
-       /* [Test]
-        public void ReadAgregatorsFromBaseGood()
-        {
-            IDevice device = new Device();
-            List<string> listagr = device.ReadAgregatorsFromBase();
-            Assert.IsEmpty(listagr);
-
-        }
+        List<string> listagr = new List<string>();
         [Test]
-        public void ReadAgregatorsFromBaseBad()
+        [TestCase("a")]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void CheckChosenAgregatorBad(string agregatorID)
         {
-            IDevice device = new Device();
-            List<string> listagr = device.ReadAgregatorsFromBase();
-            //Assert.IsNull(listagr);
-           
-            
-
+            IDevice device = new Device(Enums.State.on);
+            device.CheckChosenAgregator(listagr, agregatorID);
         }
 
         [Test]
-        [TestCase()]
-        public void CheckChosenAgregatorGood()
+        [TestCase("11111","22222")]
+        [TestCase("1", "2")]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void CheckLocalBaseBad(string myAgregator, string DeviceCode)
         {
-            IDevice device = new Device();
-           // string ret = device.CheckChosenAgregator(listagr, agregatorID);
-        }
-        */
-       
+            IDevice device = new Device(Enums.State.on);
+            device.CheckLocalBase(myAgregator, DeviceCode);
 
+        }
+
+
+
+        [Test]
+        [TestCase("bbbb", "aaaa")]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CheckLocalBaseBad2(string myAgregator, string DeviceCode)
+        {
+            IDevice device = new Device(Enums.State.on);
+            device.CheckLocalBase(myAgregator, DeviceCode);
+
+        }
 
     }
 }

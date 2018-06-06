@@ -117,40 +117,7 @@ namespace AMIAgregatorTest
         {
             IAMIAgregator agregator = new Agregator(e);
         }
-        /*
-        // Prvi test - Ako je dictionary prazan koji se salje
-        [Test]
-        [TestCase("1111", 1528236937,"3333")]
-        [ExpectedException(typeof(ArgumentException))]
-        public void SendBad(string code, long timestamp, string codeAgr)
-        {
-            IAMIAgregator agregator = new Agregator();
-            agregator.Send(code,timestamp,measurements, codeAgr);
-        }
-    
-        // Drugi test - Ako je dictionary null
-        [Test]
-        [TestCase("1111", 1528236937, "3333")]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void SendBadSecond(string code, long timestamp, string codeAgr)
-        {
-            IAMIAgregator agregator = new Agregator();
-            agregator.Send(code, timestamp, measurements2, codeAgr);
-        }
-        
-        // Treci test - Ako je timestamp van opsega
-        [Test]
-        [TestCase("1111", 1528236931, "3333")]
-        [TestCase("2222", 1546300804, "4444")]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void SendBadThird(string code, long timestamp, string codeAgr)
-        {
-            IAMIAgregator agregator = new Agregator();
-            agregator.Send(code, timestamp, measurements1, codeAgr);
-        }
-        */
-
-
+       
 
 
         [Test]

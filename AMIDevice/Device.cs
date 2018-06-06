@@ -74,12 +74,7 @@ namespace AMIDevice
             }
             else
             {
-                try { }
-                catch (Exception e)
-                {
-                    throw new ArgumentException("State is up to date");
-                }
-                return false;
+                throw new ArgumentException("State is up to date");
             }
         }
 
@@ -92,12 +87,7 @@ namespace AMIDevice
             }
             else
             {
-                try { }
-                catch (Exception e)
-                {
-                    throw new ArgumentException("State is up to date");
-                }
-                return false;
+                throw new ArgumentException("State is up to date");
             }
         }
 
@@ -109,7 +99,7 @@ namespace AMIDevice
         {
             if (myAgregator.Length != 4 || DeviceCode.Length != 4)
             {
-                throw new ArgumentException("Invalid code");
+                throw new ArgumentOutOfRangeException("Invalid code");
             }
 
             try
@@ -119,7 +109,7 @@ namespace AMIDevice
             }
             catch
             {
-                throw new ArgumentOutOfRangeException("It must be number.");
+                throw new ArgumentException("It must be number.");
             }
 
 
