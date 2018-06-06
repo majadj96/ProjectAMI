@@ -15,6 +15,8 @@ namespace Common
         string myAgregator { get; set; }
 
         bool turnOn();
+        void turnOn1(Enums.State s);
+
         bool turnOff();
     }
 }

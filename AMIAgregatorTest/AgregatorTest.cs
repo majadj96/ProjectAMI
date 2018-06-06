@@ -15,6 +15,16 @@ namespace AMIAgregatorTest
     {
 
         [Test]
+        [TestCase("",0,null, "")]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void SendTestBad(string code, long timestamp, Dictionary<Enums.MeasureType, double> measurements, string codeAgr)
+        {
+            IAMIAgregator agregator = new Agregator();
+            agregator.Send(code, timestamp, measurements, codeAgr);
+        }
+
+
+        [Test]
         public void turnOnBadParameter()
         {
             IAMIAgregator agr2 = new Agregator(Enums.State.on);

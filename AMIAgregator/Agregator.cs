@@ -75,6 +75,11 @@ namespace AMIAgregator
 
         public void Send(string code, long timestamp, Dictionary<Enums.MeasureType, double> measurements,string codeAgr)
         {
+            if (measurements == null)
+            {
+                throw new NullReferenceException("Dictionary is not set.");
+            }
+
             using (var data = new LocalBaseDBContex())
             {
                 LocalBase lb = new LocalBase()
