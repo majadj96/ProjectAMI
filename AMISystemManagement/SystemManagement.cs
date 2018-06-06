@@ -14,9 +14,9 @@ namespace AMISystemManagement
 
         public SystemManagement() { }
 
-        public SystemManagement(int e)
+        public SystemManagement(State s)
         {
-            state = State.on;
+            state = s;
         }
 
         public void Send(string agregatorCode, Dictionary<DateTime, Dictionary<string, Dictionary<DateTime, Dictionary<Enums.MeasureType, double>>>> agregatorData)
@@ -59,19 +59,31 @@ namespace AMISystemManagement
             Console.WriteLine("Measurements for Agregator [{0}] are added in GlobalDataBase.", agregatorCode);
         }
 
-        public void turnOff(Enums.State state)
+        public bool turnOff()
         {
-            if (state == State.on)
+            if (state == Enums.State.on)
             {
-                state = State.off;
+                state = Enums.State.off;
+                return true;
+            }
+            else
+            {
+                throw new ArgumentException("State is up to date");
+
             }
         }
 
-        public void turnOn(Enums.State state)
+        public bool turnOn()
         {
-            if (state == State.off)
+            if (this.state == Enums.State.off)
             {
-                state = State.on;
+                this.state = Enums.State.on;
+                return true;
+            }
+            else
+            {
+                throw new ArgumentException("State is up to date");
+
             }
         }
     }

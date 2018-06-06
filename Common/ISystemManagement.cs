@@ -13,8 +13,8 @@ namespace Common
     {
         State state { get; set; }
 
-        void turnOn(Enums.State state);
-        void turnOff(Enums.State state);
+        bool turnOn();
+        bool turnOff();
         [OperationContract]
         void Send(string agregatorCode, Dictionary<DateTime, Dictionary<string, Dictionary<DateTime, Dictionary<Enums.MeasureType, double>>>> agregatorData);
 

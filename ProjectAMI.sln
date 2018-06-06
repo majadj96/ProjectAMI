@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMIDeviceTest", "AMIDeviceT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMIAgregatorTest", "AMIAgregatorTest\AMIAgregatorTest.csproj", "{5F28E9EF-8AE2-41CC-A358-E0FA3CAC0556}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMISystemManagementTest", "AMISystemManagementTest\AMISystemManagementTest.csproj", "{92708EFC-0C9E-449B-829B-00646D901D75}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{5F28E9EF-8AE2-41CC-A358-E0FA3CAC0556}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F28E9EF-8AE2-41CC-A358-E0FA3CAC0556}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F28E9EF-8AE2-41CC-A358-E0FA3CAC0556}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92708EFC-0C9E-449B-829B-00646D901D75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92708EFC-0C9E-449B-829B-00646D901D75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92708EFC-0C9E-449B-829B-00646D901D75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92708EFC-0C9E-449B-829B-00646D901D75}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
