@@ -50,8 +50,21 @@ namespace AMIDevice
                 Console.WriteLine("Choose Agreagator:");
                 listagr = ReadAgregatorsFromBase(); //metoda citanja iz baze
 
+               
+
                 agregatorID = Console.ReadLine();
-                a = int.Parse(agregatorID);
+
+                try
+                {
+                    int ch = int.Parse(agregatorID);
+                    if (ch > listagr.Count )
+                    {
+                        agregatorID = "e";
+                    }
+                }catch(Exception e) { agregatorID = "e"; }
+
+
+                a = Convert.ToChar(agregatorID[0]);
             } while (a < 48 || a > 57);
 
 

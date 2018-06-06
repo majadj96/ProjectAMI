@@ -28,7 +28,7 @@
     </Window.Resources>
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="Pictures/background1.jpg"/>
+            <ImageBrush ImageSource="Pictures/background_en.jpg"/>
         </Grid.Background>
         <Button x:Name="first" Content="......................................................................"  Margin="0,101,0,0"   Style="{StaticResource MyButton}" HorizontalAlignment="Left" Height="42"  VerticalAlignment="Top" Width="485" FontSize="27" FontFamily="Segoe Print" Click="Button_Click1"  TextOptions.TextHintingMode="Animated" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}"/>
         <Button x:Name="second"  Content="......................................................................"  Margin="2,149,0,0"   Style="{StaticResource MyButton}" HorizontalAlignment="Left" Height="42"  VerticalAlignment="Top" Width="526" FontSize="27" FontFamily="Segoe Print" Click="Button_Click2"  TextOptions.TextHintingMode="Animated" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}"/>

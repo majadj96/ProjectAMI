@@ -8,7 +8,7 @@
         xmlns:DVC="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
         
         mc:Ignorable="d"
-        Title="FourthWindow"  Height="691.164" Width="1195.261">
+        Title="Agregator average measurements"  Height="691.164" Width="1195.261">
     <Window.Background>
         <ImageBrush ImageSource="Pictures/backgroundsmall.jpg"/>
     </Window.Background>
