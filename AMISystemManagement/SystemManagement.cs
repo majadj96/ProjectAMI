@@ -59,7 +59,7 @@ namespace AMISystemManagement
             Console.WriteLine("Measurements for Agregator [{0}] are added in GlobalDataBase.", agregatorCode);
         }
 
-        public void turnOff()
+        public void turnOff(Enums.State state)
         {
             if (state == State.on)
             {
@@ -67,7 +67,7 @@ namespace AMISystemManagement
             }
         }
 
-        public void turnOn()
+        public void turnOn(Enums.State state)
         {
             if (state == State.off)
             {
