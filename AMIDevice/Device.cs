@@ -20,6 +20,12 @@ namespace AMIDevice
         public State DeviceState { get; set; }
         public string myAgregator { get; set; }
 
+
+        public Device(State state)
+        {
+            DeviceState = state;
+        }
+
         public Device()
         {
             Console.WriteLine("-----------------Creating new Device------------------");
@@ -52,11 +58,11 @@ namespace AMIDevice
 
         }
 
-        public void turnOff(State DeviceState)
+        public void turnOff()
         {
-            if (DeviceState == State.on)
+            if (DeviceState == Enums.State.on)
             {
-                DeviceState = State.off;
+                DeviceState = Enums.State.off;
             }
             else
             {
@@ -65,15 +71,17 @@ namespace AMIDevice
             }
         }
 
-        public void turnOn(State DeviceState)
+        public bool turnOn()
         {
-            if (DeviceState == State.off)
+            if (this.DeviceState == Enums.State.off)
             {
-                DeviceState = State.on;
+                this.DeviceState = Enums.State.on;
+                return true;
             }
             else
             {
                 throw new ArgumentException("State is up to date");
+
             }
         }
 

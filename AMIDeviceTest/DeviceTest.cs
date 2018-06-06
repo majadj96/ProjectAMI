@@ -1,5 +1,6 @@
 ﻿using AMIDevice;
 using Common;
+using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -12,59 +13,44 @@ namespace AMIDeviceTest
     [TestFixture]
     public class DeviceTest
     {
+        IDevice device1;
+        IDevice device2;
 
+        [SetUp]
+        public void Setup()
+        {
+            var moq = new Mock<IDevice>();
+            moq.Setup(d => d.DeviceState).Returns(Enums.State.on);
+            device1 = moq.Object;
+            var moq2 = new Mock<IDevice>();
+            moq2.Setup(d => d.DeviceState).Returns(Enums.State.off);
+            device2 = moq2.Object;
+        }
+        
+        [Test]
+        public void turnOnGoodParameter()
+        {
+            IDevice device22 = new Device(Enums.State.off);
+         
+            bool ret = device22.turnOn();
+
+            Assert.AreEqual(true, ret);
+        
+           }
 
         [Test]
-        [TestCase(Enums.State.off)]
-        [TestCase(1)]
-        public void turnOnGoodParameter(Enums.State DeviceState)
+        public void turnOnBadParameter()
         {
-            Device deviceTest = new Device();
-            deviceTest.turnOn(DeviceState);
+            IDevice device22 = new Device(Enums.State.on);
+
+            Assert.Throws<ArgumentException>(() =>
+            {
+                bool ret = device22.turnOn();
+            });
+           
         }
 
-
-
-        [Test]
-        [TestCase(Enums.State.on)]
-        [TestCase(0)]
-        [TestCase(3)]
-        [TestCase(7)]
-        [TestCase("text")]
-        [ExpectedException(typeof(ArgumentException))]
-
-        public void turnOnBadParameter(Enums.State DeviceState)
-        {
-            Device deviceTest = new Device();
-            deviceTest.turnOn(DeviceState);
-        }
-
-        [TestCase(Enums.State.on)]
-        [TestCase(0)]
-        public void turnOffGoodParameter(Enums.State DeviceState)
-        {
-            Device deviceTest = new Device();
-            deviceTest.turnOn(DeviceState);
-        }
-
-
-
-        [Test]
-        [TestCase(Enums.State.off)]
-        [TestCase(1)]
-        [TestCase(3)]
-        [TestCase(7)]
-        [TestCase("text")]
-        [ExpectedException(typeof(ArgumentException))]
-
-        public void turnOffBadParameter(Enums.State DeviceState)
-        {
-            Device deviceTest = new Device();
-            deviceTest.turnOn(DeviceState);
-        }
-
-
-
+       
       
 
     }
