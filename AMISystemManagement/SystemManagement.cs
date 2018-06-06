@@ -98,12 +98,8 @@ namespace AMISystemManagement
             else
             {
                
-                try { }
-                catch (Exception e)
-                {
-                    throw new ArgumentException("State is up to date");
-                }
-                return false;
+               throw new ArgumentException("State is up to date");
+              
             }
         }
 
@@ -116,12 +112,8 @@ namespace AMISystemManagement
             }
             else
             {
-                try { }
-                catch (Exception e)
-                {
-                    throw new ArgumentException("State is up to date");
-                }
-                return false;
+               throw new ArgumentException("State is up to date");
+               
 
             }
         }
